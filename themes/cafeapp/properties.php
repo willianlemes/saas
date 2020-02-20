@@ -1,9 +1,9 @@
 <?php $v->layout("_theme"); ?>
 
 <div class="app_launch_header">
-    <div class="app_launch_btn income radius transition icon-plus-circle">
-      Novo
-    </div>
+  <a class="app_launch_btn income radius transition icon-plus-circle" href="<?= url('\imovel\cadastro') ?>">
+    Novo
+  </a>
 </div>
 
 <section class="app_launch_box">

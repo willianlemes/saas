@@ -3,14 +3,14 @@
  * DATABASE
  */
 define("CONF_DB_HOST", "localhost");
-define("CONF_DB_USER", "root");
-define("CONF_DB_PASS", "");
-define("CONF_DB_NAME", "saas");
+define("CONF_DB_USER", "u167578738_willian");
+define("CONF_DB_PASS", "268481");
+define("CONF_DB_NAME", "u167578738_saas");
 
 /**
  * PROJECT URLs
  */
-define("CONF_URL_BASE", "https://www.cafecontrol.com.br");
+define("CONF_URL_BASE", "https://www.primecontador.com.br");
 define("CONF_URL_TEST", "https://www.localhost/saas");
 define("CONF_URL_ADMIN", "/admin");
 

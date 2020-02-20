@@ -672,6 +672,10 @@ body {
     color: #ffffff;
 }
 
+.app_launch_btn:link {
+  text-decoration: none;
+}
+
 .app_launch_btn.income {
     border-color: var(--color-green);
     color: var(--color-green);

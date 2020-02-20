@@ -77,7 +77,7 @@ class RealtyController extends Controller
         }
 
         $json["message"] = $this->message->success("Imovel criado com sucesso!")->render();
-        $json["redirect"] = url("/imoveis");
+        $json["redirect"] = url("/imovel");
         echo json_encode($json);
         return;
     }
