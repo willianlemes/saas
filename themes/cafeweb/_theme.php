@@ -89,7 +89,7 @@
                 <h2>Contato:</h2>
                 <p class="icon-phone"><b>Telefone:</b><br> +55 55 5555.5555</p>
                 <p class="icon-envelope"><b>Email:</b><br> cafe@cafecontrol.com</p>
-                <p class="icon-map-marker"><b>Endereço:</b><br> Fpolis, SC/Brasil</p>
+                <p class="icon-map-marker"><b>Endereço:</b><br>Santo Antônio da Platina, PR/Brasil</p>
             </article>
 
             <article class="main_footer_content_item social">
