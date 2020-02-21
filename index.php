@@ -14,26 +14,9 @@ $session = new Session();
 $route = new Router(url(), ":");
 $route->namespace("Source\App");
 
-/**
- * WEB ROUTES
- */
-$route->group(null);
-$route->get("/", "Web:home");
-$route->get("/sobre", "Web:about");
-
-//blog
-$route->group("/blog");
-$route->get("/", "Web:blog");
-$route->get("/p/{page}", "Web:blog");
-$route->get("/{uri}", "Web:blogPost");
-$route->post("/buscar", "Web:blogSearch");
-$route->get("/buscar/{terms}/{page}", "Web:blogSearch");
-$route->get("/em/{category}", "Web:blogCategory");
-$route->get("/em/{category}/{page}", "Web:blogCategory");
-
 //auth
 $route->group(null);
-$route->get("/entrar", "Web:login");
+$route->get("/", "Web:login");
 $route->post("/entrar", "Web:login");
 $route->get("/cadastrar", "Web:register");
 $route->post("/cadastrar", "Web:register");
