@@ -1,4 +1,66 @@
 $(function () {
+
+  $(".types").change(function(){
+    if ($(this).val()==="F") {
+      $("#name").text("Nome");
+      $("#nickname").text("Apelido");
+      $("#datebirth").text("Data de Nascimento");
+      $("#rg").text("RG");
+      $("#cpf").text("CPF");
+      $("#genre").prop('disabled', false);
+    }else {
+      $("#name").text("Razão Social");
+      $("#nickname").text("Nome Fantasia");
+      $("#datebirth").text("Data de Fundação da Empresa");
+      $("#rg").text("IE");
+      $("#cpf").text("CNPJ");
+      $("#genre").prop('disabled', 'disabled');
+      $("#genre").val("");
+    }
+  });
+
+  var url = $(".states").data("url");
+
+  $.getJSON(url, function( data ) {
+
+    var options = '<option value="">Selecione</option>';
+
+    $.each(data, function (key,val) {
+      options += '<option value="' + val.sigla + '">' + val.nome + '</option>';
+    });
+
+    $(".states").html(options);
+
+    $(".states").change(function() {
+
+      var options_cidades = '';
+      var state = "";
+
+      $(".states option:selected").each(function () {
+        state = $(this).val();
+      });
+
+      if (state==="") {
+        $('.cities').prop('disabled', 'disabled');
+        options_cidades = '<option value="">Selecione um estado</option>';
+      }else {
+        $('.cities').prop('disabled', false);
+        options_cidades = '<option value="">Selecione</option>';
+      }
+
+      $.each(data, function (key, val) {
+        if(val.sigla == state) {
+          $.each(val.cidades, function (key_city, val_city) {
+            options_cidades += '<option value="' + val_city + '">' + val_city + '</option>';
+          });
+        }
+      });
+
+      $(".cities").html(options_cidades);
+
+       }).change();
+    });
+
     var effecttime = 200;
 
     /*
