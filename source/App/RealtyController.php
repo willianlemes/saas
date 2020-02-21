@@ -6,6 +6,7 @@ use Source\Core\Controller;
 use Source\Core\View;
 use Source\Models\Auth;
 use Source\Models\Realty;
+use Source\Models\Person;
 use Source\Support\Pager;
 
 class RealtyController extends Controller
@@ -60,8 +61,27 @@ class RealtyController extends Controller
             false
         );
 
+        $people = (new Person())->find(null, null, 'id,name')->fetch(true);
+        $finality = [
+           "Venda",
+           "Troca"
+        ];
+        $types = [
+          "Casa",
+          "Ponto Comercial",
+          "Barracão",
+          "Terreno",
+          "Sobrado",
+          "Sítio",
+          "Fazenda",
+          "Chácara"
+        ];
+
         echo $this->view->render("views/realty/registration_form", [
-        "head" => $head
+        "head" => $head,
+        "people" => $people,
+        "finality" => $finality,
+        "types" => $types
       ]);
     }
 

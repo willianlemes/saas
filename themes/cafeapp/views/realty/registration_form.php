@@ -2,117 +2,189 @@
 
 <div class="app_formbox app_widget">
     <form class="app_form" action="<?= url("/app/profile"); ?>" method="post">
+      <fieldset>
+        <legend>Sobre o Imóvel</legend>
         <input type="hidden" name="id" value="true"/>
         <div class="label_group">
-            <label>
-                <span class="field">Proprietário:</span>
-                <input class="radius" type="text" name="name" required
-                       value="<?= $person->name ?? null; ?>"/>
-            </label>
-        </div>
-
-        <div class="label_group">
-
           <label>
-              <span class="field">Gênero:</span>
+              <span class="field">Proprietário:</span>
               <select name="genre" required>
                   <option value="">Selecione</option>
-                  <option <?= ($person->genre == "male" ? "selected" : ""); ?> value="male">&ofcir; Masculino</option>
-                  <option <?= ($person->genre == "female" ? "selected" : ""); ?> value="female">&ofcir; Feminino</option>
-                  <option <?= ($person->genre == "other" ? "selected" : ""); ?> value="other">&ofcir; Outro</option>
-              </select>
-          </label>
-
-          <label>
-              <span class="field">Data de Nascimento:</span>
-              <input class="radius mask-date" type="text" name="datebirth" placeholder="dd/mm/yyyy" required
-                     value="<?= (isset($person->datebirth) ? date_fmt($person->datebirth, "d/m/Y") : null); ?>"/>
-          </label>
-        </div>
-
-        <div class="label_group">
-          <label>
-              <span class="field">RG:</span>
-              <input class="radius mask-doc" type="text" name="rg" placeholder="Apenas números" required
-                     value="<?= $person->rg ?? null; ?>"/>
-          </label>
-
-          <label>
-              <span class="field">CPF:</span>
-              <input class="radius mask-doc" type="text" name="cpf" placeholder="Apenas números" required
-                     value="<?= $user->cpf ?? null; ?>"/>
-          </label>
-        </div>
-
-        <div class="label_group">
-          <label>
-              <span class="field">Profissão:</span>
-              <input class="radius" type="text" name="occupation"
-                     value="<?= $person->occupation ?? null; ?>"/>
-          </label>
-
-          <label>
-              <span class="field">E-mail:</span>
-              <input class="radius" type="email" name="email"
-                     value="<?= $person->email ?? null; ?>"/>
-          </label>
-        </div>
-
-        <div class="label_group">
-          <label>
-              <span class="field">Telefone:</span>
-              <input class="radius" type="text" name="phone"
-                     value="<?= $person->phone ?? null; ?>"/>
-          </label>
-
-          <label>
-              <span class="field">Celular:</span>
-              <input class="radius" type="text" name="cellphone"
-                     value="<?= $person->cellphone ?? null; ?>"/>
-          </label>
-        </div>
-
-        <div class="label_group">
-          <label>
-              <span class="field">Logradouro:</span>
-              <input class="radius" type="text" name="street"
-                     value="<?= $person->street ?? null; ?>"/>
-          </label>
-
-          <label>
-              <span class="field">Número:</span>
-              <input class="radius" type="text" name="street_number"
-                     value="<?= $person->cellphone ?? null; ?>"/>
-          </label>
-
-        </div>
-
-        <div class="label_group">
-          <label>
-              <span class="field">Bairro:</span>
-              <input class="radius" type="text" name="neighborhood"
-                     value="<?= $person->neighborhood ?? null; ?>"/>
-          </label>
-        </div>
-
-        <div class="label_group">
-          <label>
-              <span class="field">Estado:</span>
-              <select name="genre" required>
-                  <option value="">Selecione</option>
-                  <?php foreach ($states as $key => $value): ?>
-                    <option <?= ($person->state == $key ? "selected" : ""); ?> value="<?= $key ?>"><?= $value ?></option>
+                  <?php foreach ($people as $person): ?>
+                    <option value="<?= $person->id ?>">
+                      <?= $person->name ?>
+                    </option>
                   <?php endforeach; ?>
               </select>
           </label>
 
           <label>
-              <span class="field">Cidade:</span>
-              <input class="radius" type="text" name="city"
-                     value="<?= $person->city ?? null; ?>"/>
+              <span class="field">Finalidade:</span>
+              <select name="finality" required>
+                  <option value="">Selecione</option>
+                  <?php foreach ($finality as $key => $value): ?>
+                    <option value="<?= $key ?>"><?= $value ?></option>
+                  <?php endforeach; ?>
+              </select>
           </label>
         </div>
 
+        <div class="label_group">
+          <label>
+              <span class="field">Tipo:</span>
+              <select name="type" required>
+                  <option value="">Selecione</option>
+                  <?php foreach ($types as $key => $value): ?>
+                    <option value="<?= $key ?>"><?= $value ?></option>
+                  <?php endforeach; ?>
+              </select>
+          </label>
+          <label>
+              <span class="field">Preço de Venda:</span>
+              <input class="radius mask-money" type="text" name="value" required/>
+          </label>
+        </div>
+
+      </fieldset>
+        <fieldset>
+          <legend>Localização</legend>
+          <div class="label_group">
+            <label>
+                <span class="field">Logradouro:</span>
+                <input class="radius" type="text" name="occupation"
+                       value="<?= $person->occupation ?? null; ?>"/>
+            </label>
+
+            <label>
+                <span class="field">Número:</span>
+                <input class="radius" type="email" name="email"
+                       value="<?= $person->email ?? null; ?>"/>
+            </label>
+          </div>
+          <div class="label_group">
+            <label>
+                <span class="field">Bairro:</span>
+                <input class="radius" type="text" name="occupation"
+                       value="<?= $person->occupation ?? null; ?>"/>
+            </label>
+
+            <label>
+                <span class="field">CEP:</span>
+                <input class="radius" type="email" name="email"
+                       value="<?= $person->email ?? null; ?>"/>
+            </label>
+          </div>
+          <div class="label_group">
+            <label>
+                <span class="field">Estado:</span>
+                <input class="radius" type="text" name="occupation"
+                       value="<?= $person->occupation ?? null; ?>"/>
+            </label>
+
+            <label>
+                <span class="field">Cidade:</span>
+                <input class="radius" type="email" name="email"
+                       value="<?= $person->email ?? null; ?>"/>
+            </label>
+          </div>
+          <div class="label_group">
+            <label>
+                <span class="field">Complemento:</span>
+                <input class="radius" type="text" name="occupation"
+                       value="<?= $person->occupation ?? null; ?>"/>
+            </label>
+          </div>
+
+        </fieldset>
+
+        <fieldset>
+          <legend>Área</legend>
+          <div class="label_group">
+            <label>
+                <span class="field">Unidade de Medida:</span>
+                <select name="type" required>
+                    <option value="">Selecione</option>
+                    <option value="">Alqueire</option>
+                    <option value="">Metro 2</option>
+                    <option value="">Hectare</option>
+                    <option value="">Km</option>
+                    <option value="">Metro</option>
+                </select>
+            </label>
+          </div>
+          <div class="label_group">
+            <label>
+                <span class="field">Frente:</span>
+                <input class="radius" type="number" name="phone"
+                       value="<?= $person->phone ?? null; ?>"/>
+            </label>
+
+            <label>
+                <span class="field">Fundo:</span>
+                <input class="radius" type="number" name="cellphone"
+                       value="<?= $person->cellphone ?? null; ?>"/>
+            </label>
+          </div>
+          <div class="label_group">
+            <label>
+                <span class="field">Lateral Direita:</span>
+                <input class="radius" type="number" name="phone"
+                       value="<?= $person->phone ?? null; ?>"/>
+            </label>
+
+            <label>
+                <span class="field">Lateral Esquerda:</span>
+                <input class="radius" type="number" name="cellphone"
+                       value="<?= $person->cellphone ?? null; ?>"/>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Características</legend>
+          <div class="label_group">
+            <label>
+                <span class="field">Qtd. Dormitórios:</span>
+                <input class="radius" type="number" name="phone"
+                       value="<?= $person->phone ?? null; ?>"/>
+            </label>
+
+            <label>
+                <span class="field">Qtd. Suítes:</span>
+                <input class="radius" type="number" name="cellphone"
+                       value="<?= $person->cellphone ?? null; ?>"/>
+            </label>
+          </div>
+          <div class="label_group">
+            <label>
+                <span class="field">Qtd. Banheiros:</span>
+                <input class="radius" type="number" name="phone"
+                       value="<?= $person->phone ?? null; ?>"/>
+            </label>
+
+            <label>
+                <span class="field">Qtd. Salas:</span>
+                <input class="radius" type="number" name="cellphone"
+                       value="<?= $person->cellphone ?? null; ?>"/>
+            </label>
+          </div>
+          <div class="label_group">
+            <label>
+                <span class="field">Capacidade de Carros na Garagem:</span>
+                <input class="radius" type="number" name="phone"
+                       value="<?= $person->phone ?? null; ?>"/>
+            </label>
+
+            <label>
+                <span class="field">É mobiliado?</span>
+                <select name="type" required>
+                    <option value="">Selecione</option>
+                    <option value="">Sim</option>
+                    <option value="">Não</option>
+                </select>
+            </label>
+          </div>
+        </fieldset>
         <div class="al-center">
             <div class="app_formbox_actions">
                 <button class="btn btn_inline radius transition icon-pencil-square-o">Salvar</button>

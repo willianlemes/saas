@@ -19,7 +19,7 @@ body {
 
 .app_form .field {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
     font-size: var(--font-small);
     color: #888888;
 }
@@ -788,7 +788,7 @@ body {
 }
 
 .app_formbox .field {
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 .app_formbox_actions {
@@ -1033,4 +1033,25 @@ body {
   font-weight: bold;
   cursor: pointer;
   transition: 0.5s;
+}
+
+legend{
+  padding: 5px 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background: var(--body-color);
+  color: #ffffff;
+  -webkit-border-radius: var(--radius-normal);
+  -moz-border-radius: var(--radius-normal);
+  border-radius: var(--radius-normal);
+}
+
+fieldset{
+  padding: 10px 15px;
+  margin: 10px 0px;
+  font-size: var(--font-small);
+  -webkit-border-radius: var(--radius-normal);
+  -moz-border-radius: var(--radius-normal);
+  border-radius: var(--radius-normal);
+  border: 2px solid var(--body-color);
 }

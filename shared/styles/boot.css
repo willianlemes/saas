@@ -186,6 +186,10 @@ input:-webkit-autofill {
     border-radius: var(--radius-normal);
 }
 
+.radius .col-2 {
+  width: 16.66%!important;
+}
+
 .box-shadow {
     -webkit-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
