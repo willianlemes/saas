@@ -1,9 +1,25 @@
 $(function () {
   var urlSearch = $('.autocomplete').data('urlSearch');
 
-  $('.autocomplete').autocomplete({
-    source: urlSearch
-  });
+  $(".autocomplete").autocomplete({
+      minLength: 3,
+      delay: 450,
+      appendTo: '#label_property',
+      source: function(data,add){
+        $.ajax({
+          url: urlSearch + '/' + data.term,
+          method: 'GET',
+          dataType: 'json',
+          success:function (response) {
+            add(response);
+          }
+        });
+      },
+      select: function( event, ui ) {
+        $('input[name=property]').val(ui.item.id);
+        $('.autocomplete').val(ui.item.label);
+      }
+   });
 
   $(".row").click(function() {
     window.location.href=$(this).data("href");

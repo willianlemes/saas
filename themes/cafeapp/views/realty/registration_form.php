@@ -6,12 +6,13 @@
         <legend>Sobre o Imóvel</legend>
         <input type="hidden" name="id" value="true"/>
         <div class="label_group">
-          <label>
-              <span class="field">Proprietário:</span>
-              <input class="radius autocomplete"
-                     type="text"
-                     data-url-search="<?= url('/imoveis/proprietarios') ?>"
-                     value="">
+          <label id="label_property">
+            <span class="field">Proprietário:</span>
+            <input type="hidden" name="property" value=""/>
+            <input class="radius autocomplete"
+                   type="text"
+                   data-url-search="<?= url('/imoveis/proprietarios') ?>"
+                   value="">
           </label>
 
           <label>

@@ -102,22 +102,17 @@ class RealtyController extends Controller
         return;
     }
 
-    public function proprietary()
+    public function proprietary($data)
     {
-      $proprietary = (new Person())->find(null,null,'id, name')->fetch(true);
-      $first = true;
-      $arrayJson = '[';
-      foreach ($proprietary as $property) {
-        if (!$first){
-          $arrayJson .= ',';
-        }else {
-          $first = false;
+        $term = "%{$data['term']}%";
+        $proprietary = (new Person())->find("name LIKE :term", "term={$term}", "id, name")->fetch(true);
+
+        $response = [];
+        foreach ($proprietary as $property) {
+            $response[] = ['value' => $property->name,
+                           'label' => $property->name,
+                           'id' => $property->id];
         }
-        $person['id'] = $property->id;
-        $person['name'] = $property->name;
-        $arrayJson .= json_encode($person,JSON_UNESCAPED_UNICODE);
-      }
-      $arrayJson .= ']';
-      echo $arrayJson;
+        echo json_encode($response, JSON_UNESCAPED_UNICODE);
     }
 }

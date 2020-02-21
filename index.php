@@ -69,8 +69,8 @@ $route->post("/profile", "App:profile");
  $route->get("/cadastrar", "RealtyController:registrationForm");
  $route->get("/alterar/{id}", "RealtyController:registrationForm");
  $route->post("/salvar", "RealtyController:save");
+ $route->get("/proprietarios/{term}", "RealtyController:proprietary");
 
-$route->get("/proprietarios", "RealtyController:proprietary");
  /**
  * PERSON
  */
