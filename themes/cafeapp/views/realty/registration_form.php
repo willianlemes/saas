@@ -5,11 +5,10 @@
         <input type="hidden" name="id" value="true"/>
         <div class="label_group">
             <label>
-                <span class="field">Nome:</span>
+                <span class="field">Proprietário:</span>
                 <input class="radius" type="text" name="name" required
                        value="<?= $person->name ?? null; ?>"/>
             </label>
-
         </div>
 
         <div class="label_group">

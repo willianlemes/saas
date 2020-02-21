@@ -10,26 +10,25 @@
     <?php if (!$people): ?>
       <div class="message info icon-info">Ainda não existem imóveis cadastrados</div>
     <?php else: ?>
-        <div class="app_launch_item header">
-            <p class="desc">Nome</p>
-            <p class="date">Apelido</p>
-        </div>
+
+      <table class="table">
+        <tr>
+          <th>Nome</th>
+          <th>Apelido</th>
+          <th>Estado</th>
+          <th>Cidade</th>
+        </tr>
         <?php foreach ($people as $person): ?>
-            <article class="app_launch_item">
-                <p class="desc app_invoice_link transition">
-                  <a title="<?= $person->name; ?>"
-                     href="<?= url("/pessoas/alterar/{$person->id}"); ?>">
-                     <?= str_limit_words($person->name, 3, "&nbsp;<span class='icon-info icon-notext'></span>") ?>
-                  </a>
-                </p>
-                <p class="desc app_invoice_link transition">
-                  <a title="<?= $person->nickname; ?>"
-                     href="<?= url("/pessoas/alterar/{$person->id}"); ?>">
-                     <?= str_limit_words($person->nickname, 3, "&nbsp;<span class='icon-info icon-notext'></span>") ?>
-                  </a>
-                </p>
-            </article>
+          <tr class="row"
+              data-href="<?= url("pessoas/alterar/{$person->id}") ?>">
+            <td><?= $person->name ?></td>
+            <td><?= $person->nickname ?></td>
+            <td><?= $person->state ?></td>
+            <td><?= $person->city ?></td>
+          </tr>
         <?php endforeach; ?>
+      </table>
+
         <?= $paginator; ?>
     <?php endif; ?>
 </section>

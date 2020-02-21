@@ -1,5 +1,9 @@
 $(function () {
 
+  $(".row").click(function() {
+    window.location.href=$(this).data("href");
+  });
+
   $(".types").change(function(){
     if ($(this).val()==="F") {
       $("#name").text("Nome");

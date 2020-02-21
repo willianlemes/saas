@@ -60,7 +60,7 @@ class RealtyController extends Controller
             false
         );
 
-        echo $this->view->render("realty", [
+        echo $this->view->render("views/realty/registration_form", [
         "head" => $head
       ]);
     }

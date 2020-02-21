@@ -1001,3 +1001,36 @@ body {
 .paginator span {
     background: #cccccc;
 }
+
+.table{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th{
+  height: 50px;
+  color: var(--weight-bold);
+  font-weight: normal;
+}
+
+.table tr{
+  color: var(--body-color);
+  font-weight: var(--weight-bold);
+}
+
+.table td{
+  height: 30px;
+}
+
+.table th, td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.table .row:hover {
+  background: var(--body-color);
+  color: #ffffff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.5s;
+}
