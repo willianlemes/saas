@@ -37,7 +37,7 @@ class RealtyController extends Controller
         $pager = new Pager(url("/imovel/p/"));
         $pager->pager($properties->count(), 7, ($data['page'] ?? 1));
 
-        echo $this->view->render("properties", [
+        echo $this->view->render("views/realty/index", [
         "user" => $this->user,
         "head" => $head,
         "properties" => $properties->limit($pager->limit())->offset($pager->offset())->fetch(true),
