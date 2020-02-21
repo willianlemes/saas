@@ -20,13 +20,16 @@ $(function () {
   });
 
   var url = $(".states").data("url");
+  var stateValue = $(".states").data("value");
 
   $.getJSON(url, function( data ) {
 
     var options = '<option value="">Selecione</option>';
 
     $.each(data, function (key,val) {
-      options += '<option value="' + val.sigla + '">' + val.nome + '</option>';
+      options += '<option value="' + val.sigla + '" '
+                  + (val.sigla == stateValue ? 'selected' : '') +
+                  '>' + val.nome + '</option>';
     });
 
     $(".states").html(options);
@@ -35,6 +38,7 @@ $(function () {
 
       var options_cidades = '';
       var state = "";
+      var cityValue = $(".cities").data("value");
 
       $(".states option:selected").each(function () {
         state = $(this).val();
@@ -51,7 +55,9 @@ $(function () {
       $.each(data, function (key, val) {
         if(val.sigla == state) {
           $.each(val.cidades, function (key_city, val_city) {
-            options_cidades += '<option value="' + val_city + '">' + val_city + '</option>';
+            options_cidades += '<option value="' + val_city + '"'
+            + (val_city == cityValue ? 'selected' : '') +
+            '>' + val_city + '</option>';
           });
         }
       });
@@ -239,8 +245,6 @@ $(function () {
     $(document).ajaxError(function(event, jqxhr, ajaxOptions, errorThrown) {
             var contentType   = jqxhr.getResponseHeader("Content-Type");
             var responseBody  = jqxhr.responseText;
-
-            alert(errorThrown);
 
             //do something depending on response headers and response body.
     });

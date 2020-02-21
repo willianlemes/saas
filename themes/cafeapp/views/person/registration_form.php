@@ -135,13 +135,15 @@
           <label>
               <span class="field">Estado:</span>
               <select class="states" name="state" size="1"
-                      data-url="<?= url("/storage/estados_cidades.json") ?>">
+                      data-url="<?= url("/storage/estados_cidades.json") ?>"
+                      data-value="<?= $person->state ?? null; ?>">
               </select>
           </label>
 
           <label>
               <span class="field">Cidade:</span>
-              <select class="cities" name="city">
+              <select class="cities" name="city"
+                      data-value="<?= $person->city ?? null; ?>">
               </select>
           </label>
         </div>
