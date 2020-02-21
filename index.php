@@ -63,14 +63,22 @@ $route->post("/profile", "App:profile");
 /**
  * REALTY
  */
- $route->group("/imovel");
-$route->get("/", "RealtyController:index");
+ $route->group("/imoveis");
+ $route->get("/", "RealtyController:index");
  $route->get("/p/{page}", "RealtyController:index");
- $route->get("/cadastro", "RealtyController:registrationForm");
+ $route->get("/cadastrar", "RealtyController:registrationForm");
+ $route->get("/alterar/{id}", "RealtyController:registrationForm");
  $route->post("/salvar", "RealtyController:save");
 
-
-
+ /**
+ * PERSON
+ */
+ $route->group("/pessoas");
+ $route->get("/", "PersonController:index");
+ $route->get("/p/{page}", "PersonController:index");
+ $route->get("/cadastrar", "PersonController:registrationForm");
+ $route->get("/alterar/{id}", "PersonController:registrationForm");
+ $route->post("/salvar", "PersonController:save");
 
 /**
  * ERROR ROUTES
