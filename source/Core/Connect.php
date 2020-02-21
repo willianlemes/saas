@@ -28,12 +28,21 @@ class Connect
     {
         if (empty(self::$instance)) {
             try {
-                self::$instance = new \PDO(
-                    "mysql:host=" . CONF_DB_HOST . ";dbname=" . CONF_DB_NAME,
-                    CONF_DB_USER,
-                    CONF_DB_PASS,
-                    self::OPTIONS
-                );
+                if (strpos($_SERVER['HTTP_HOST'], "localhost") !== false) {
+                    self::$instance = new \PDO(
+                        "mysql:host=" . CONF_DB_HOST_TEST . ";dbname=" . CONF_DB_NAME_TEST,
+                        CONF_DB_USER_TEST,
+                        CONF_DB_PASS_TEST,
+                        self::OPTIONS
+                    );
+                } else {
+                    self::$instance = new \PDO(
+                        "mysql:host=" . CONF_DB_HOST . ";dbname=" . CONF_DB_NAME,
+                        CONF_DB_USER,
+                        CONF_DB_PASS,
+                        self::OPTIONS
+                    );
+                }
             } catch (\PDOException $exception) {
                 redirect("/ops/problemas");
             }

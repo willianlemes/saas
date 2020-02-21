@@ -8,6 +8,14 @@ define("CONF_DB_PASS", "268481");
 define("CONF_DB_NAME", "u167578738_saas");
 
 /**
+ * DATABASE TEST
+ */
+define("CONF_DB_HOST_TEST", "localhost");
+define("CONF_DB_USER_TEST", "root");
+define("CONF_DB_PASS_TEST", "");
+define("CONF_DB_NAME_TEST", "saas");
+
+/**
  * PROJECT URLs
  */
 define("CONF_URL_BASE", "https://www.primecontador.com.br");
