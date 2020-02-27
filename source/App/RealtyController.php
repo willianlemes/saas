@@ -101,4 +101,23 @@ class RealtyController extends Controller
         echo json_encode($json);
         return;
     }
+
+    public function proprietary()
+    {
+      $proprietary = (new Person())->find(null,null,'id, name')->fetch(true);
+      $first = true;
+      $arrayJson = '[';
+      foreach ($proprietary as $property) {
+        if (!$first){
+          $arrayJson .= ',';
+        }else {
+          $first = false;
+        }
+        $person['id'] = $property->id;
+        $person['name'] = $property->name;
+        $arrayJson .= json_encode($person,JSON_UNESCAPED_UNICODE);
+      }
+      $arrayJson .= ']';
+      echo $arrayJson;
+    }
 }

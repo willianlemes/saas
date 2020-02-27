@@ -8,14 +8,10 @@
         <div class="label_group">
           <label>
               <span class="field">Proprietário:</span>
-              <select name="genre" required>
-                  <option value="">Selecione</option>
-                  <?php foreach ($people as $person): ?>
-                    <option value="<?= $person->id ?>">
-                      <?= $person->name ?>
-                    </option>
-                  <?php endforeach; ?>
-              </select>
+              <input class="radius autocomplete"
+                     type="text"
+                     data-url-search="<?= url('/imoveis/proprietarios') ?>"
+                     value="">
           </label>
 
           <label>

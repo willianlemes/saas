@@ -1,4 +1,9 @@
 $(function () {
+  var urlSearch = $('.autocomplete').data('urlSearch');
+
+  $('.autocomplete').autocomplete({
+    source: urlSearch
+  });
 
   $(".row").click(function() {
     window.location.href=$(this).data("href");
