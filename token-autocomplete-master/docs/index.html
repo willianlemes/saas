@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Token Autocomplete Sample</title>
+
+    <script src="https://raw.githack.com/sabieber/token-autocomplete/master/built/token-autocomplete.js"></script>
+    <link href="https://raw.githack.com/sabieber/token-autocomplete/master/lib/token-autocomplete.css" rel="stylesheet" type="text/css" media="all">
+
+    <style>
+    body {
+        background-color: #333;
+    }
+    </style>
+</head>
+<body>
+    <form>
+        <div id="sample"></div>
+        <div id="sample2">
+            <option value="apple">
+                Apple
+            </option>
+            <option value="banana">
+                Banana
+            </option>
+            <option value="donut" selected="selected">
+                Donut
+            </option>
+            <option value="pizza">
+                Pizza
+            </option>
+            <option value="burger" selected="selected">
+                Burger
+            </option>
+            <option value="pancake">
+                Pancake
+            </option>
+        </div>
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+    
+
+    <script>
+    
+    let tokenAutocomplete = new TokenAutocomplete({
+        name: 'sample',
+        selector: '#sample',
+        noMatchesText: 'No matching results...',
+        initialTokens: ['token1', 'token2', 'token3'],
+        initialSuggestions: ['apple', 'banana', 'donut', 'pizza', 'burger', 'pancake']
+    });
+    tokenAutocomplete.debug(true);
+
+    let tokenAutocomplete2 = new TokenAutocomplete({
+        name: 'sample2',
+        selector: '#sample2',
+        noMatchesText: 'No matching results...'
+    });
+    tokenAutocomplete2.debug(true);
+    
+    </script>
+</body>
+</html>

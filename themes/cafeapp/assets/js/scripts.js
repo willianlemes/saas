@@ -1,10 +1,24 @@
 $(function () {
+
+  $.fn.addSelected = function(name) {
+
+    console.log(name);
+    $('<span>', {class: 'tag'}).append(
+      $('<span>', {class: 'tag-text'}).text(name),
+      $('<button>', {class: 'tag-remove'}).click(function() {
+        // return $('#' + id).removeTag(encodeURI(value));
+      })
+    ).insertBefore('.autocomplete');
+
+    $('.autocomplete').attr('type','hidden');
+
+  };
+
   var urlSearch = $('.autocomplete').data('urlSearch');
 
   $(".autocomplete").autocomplete({
       minLength: 3,
       delay: 450,
-      appendTo: '#label_property',
       source: function(data,add){
         $.ajax({
           url: urlSearch + '/' + data.term,
@@ -17,7 +31,8 @@ $(function () {
       },
       select: function( event, ui ) {
         $('input[name=property]').val(ui.item.id);
-        $('.autocomplete').val(ui.item.label);
+        // $('.autocomplete').val(ui.item.label);
+        $(this).addSelected(ui.item.label);
       }
    });
 
