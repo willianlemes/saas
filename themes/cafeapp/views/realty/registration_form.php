@@ -4,14 +4,18 @@
     <form class="app_form" action="<?= url("/app/profile"); ?>" method="post">
       <fieldset>
         <legend>Sobre o Imóvel</legend>
-
-        <div class="input_select radius">
-          <input type="hidden" name="property" value=""/>
-          <input class="radius autocomplete"
-                 type="text"
-                 data-url-search="<?= url('/imoveis/proprietarios') ?>"
-                 value="">
-        </div>
+          <!-- <label> -->
+            <span class="field">Proprietário:</span>
+            <div class="tagsinput">
+              <div id="addTag" >
+                <input type="hidden" name="property" value=""/>
+                <input class="tag-input radius autocomplete"
+                       type="text"
+                       data-url-search="<?= url('/imoveis/proprietarios') ?>"
+                       value="">
+              </div>
+            </div>
+         <!-- </label> -->
 
         <div class="label_group">
           <label>

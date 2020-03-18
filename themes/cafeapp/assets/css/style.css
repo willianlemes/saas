@@ -1055,18 +1055,7 @@ fieldset{
   border: 2px solid var(--body-color);
 }
 
-/* .input_select{
-  width: 100%;
-  height: 40px;
-  font-size: 1em;
-  border: 2px solid #cccccc;
-  /* background-color: blue */
-} */
-
-.input_select {
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
+.tagsinput {
 	display: flex;
 	-webkit-flex-wrap: wrap;
 	-ms-flex-wrap: wrap;
@@ -1078,33 +1067,11 @@ fieldset{
 	line-height: 20px;
 	color: #556270;
 	padding: 5px 5px 0 5px;
-	/* border: 1px solid #e6e6e6; */
-	border-radius: 2px;
-  border: 2px solid #cccccc;
-  height: 40px;
+	border: 2px solid #cccccc;
+  margin-bottom: 10px;
 }
 
-.input_select input{
-  /* border: none; */
-  padding: 0;
-  margin: 0;
-  /* background-color: red; */
-  height: 100%;
-}
-
-.input_select input:focus{
-  border-color: #ccc;
-  border: none;
-  box-shadow: 0 0 0 0;
-  border: 0 none;
-  outline: 0;
-}
-
-.tagsinput * {
-	box-sizing: border-box;
-}
-
-.tag {
+.tagsinput .tag {
 	position: relative;
 	background: #556270;
 	display: block;
@@ -1116,7 +1083,7 @@ fieldset{
 	margin: 0 5px 5px 0;
 }
 
-.tag-remove {
+.tagsinput .tag .tag-remove {
 	position: absolute;
 	background: none;
 	display: block;
@@ -1131,28 +1098,6 @@ fieldset{
 	line-height: 30px;
 	padding: 0;
 	border: 0;
-}
-
-.tag-remove:before,
-.tag-remove:after {
-	background: #ff6b6b;
-	position: absolute;
-	display: block;
-	width: 10px;
-	height: 2px;
-	top: 14px;
-	left: 10px;
-	content: '';
-}
-
-.tag-remove:before {
-	-webkit-transform: rotateZ(45deg);
-	transform: rotateZ(45deg);
-}
-
-.tag-remove:after {
-	-webkit-transform: rotateZ(-45deg);
-	transform: rotateZ(-45deg);
 }
 
 .tagsinput div {
@@ -1173,30 +1118,24 @@ fieldset{
 	margin: 0 5px 5px 0;
 }
 
-.tagsinput div input.error {
-	color: #ff6b6b;
+.tagsinput .tag .tag-remove:before,
+.tagsinput .tag .tag-remove:after {
+	background: #ff6b6b;
+	position: absolute;
+	display: block;
+	width: 10px;
+	height: 2px;
+	top: 14px;
+	left: 10px;
+	content: '';
 }
 
-.tagsinput div input::-ms-clear {
-	display: none;
+.tagsinput .tag .tag-remove:before {
+	-webkit-transform: rotateZ(45deg);
+	transform: rotateZ(45deg);
 }
 
-.tagsinput div input::-webkit-input-placeholder {
-	color: #ccc;
-	opacity: 1.0;
-}
-
-.tagsinput div input:-moz-placeholder {
-	color: #ccc;
-	opacity: 1.0;
-}
-
-.tagsinput div input::-moz-placeholder {
-	color: #ccc;
-	opacity: 1.0;
-}
-
-.tagsinput div input:-ms-input-placeholder {
-	color: #ccc;
-	opacity: 1.0;
+.tagsinput .tag .tag-remove:after {
+	-webkit-transform: rotateZ(-45deg);
+	transform: rotateZ(-45deg);
 }

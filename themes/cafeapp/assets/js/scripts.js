@@ -2,15 +2,18 @@ $(function () {
 
   $.fn.addSelected = function(name) {
 
-    console.log(name);
     $('<span>', {class: 'tag'}).append(
       $('<span>', {class: 'tag-text'}).text(name),
-      $('<button>', {class: 'tag-remove'}).click(function() {
-        // return $('#' + id).removeTag(encodeURI(value));
-      })
-    ).insertBefore('.autocomplete');
+      $('<button>', {class: 'tag-remove'})
+    ).insertBefore('#addTag');
 
     $('.autocomplete').attr('type','hidden');
+
+    $('.tag-remove').click(function() {
+      $('.tag').remove();
+      $('.autocomplete').attr('type','text');
+      $('.tag-input').val("");
+    });
 
   };
 
@@ -31,7 +34,6 @@ $(function () {
       },
       select: function( event, ui ) {
         $('input[name=property]').val(ui.item.id);
-        // $('.autocomplete').val(ui.item.label);
         $(this).addSelected(ui.item.label);
       }
    });
