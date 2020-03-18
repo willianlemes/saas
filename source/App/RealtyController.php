@@ -88,7 +88,16 @@ class RealtyController extends Controller
     public function save(array $data):void
     {
         $realty = new Realty();
-        $realty->name = $data["name"];
+        $realty->name = $data["propety"];
+        $realty->finality = $data["finality"];
+        $realty->type = $data["type"];
+        $realty->value = $data["value"];
+        $realty->occupation = $data["occupation"];
+        $realty->email = $data["email"];
+        $realty->neighborhood = $data["neighborhood"];
+        $realty->cep = $data["cep"];
+        $realty->complement = $data["complement"];
+        $realty->city = $data["city"];
 
         if (!$realty->save()) {
             $json["message"] = $realty->message()->render();

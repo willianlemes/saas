@@ -288,6 +288,8 @@ $(function () {
             var contentType   = jqxhr.getResponseHeader("Content-Type");
             var responseBody  = jqxhr.responseText;
 
+            console.log(responseBody);
+
             //do something depending on response headers and response body.
     });
 

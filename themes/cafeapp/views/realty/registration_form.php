@@ -5,7 +5,7 @@
       <fieldset>
         <legend>Sobre o Imóvel</legend>
           <!-- <label> -->
-            <span class="field">Proprietário:</span>
+            <!-- <span class="field">Proprietário:</span> -->
             <div class="tagsinput">
               <div id="addTag" >
                 <input type="hidden" name="property" value=""/>
@@ -57,7 +57,7 @@
 
             <label>
                 <span class="field">Número:</span>
-                <input class="radius" type="email" name="email"
+                <input class="radius" type="text" name="number"
                        value="<?= $person->email ?? null; ?>"/>
             </label>
           </div>
@@ -70,27 +70,27 @@
 
             <label>
                 <span class="field">CEP:</span>
-                <input class="radius" type="email" name="email"
+                <input class="radius" type="email" name="cep"
                        value="<?= $person->email ?? null; ?>"/>
             </label>
           </div>
           <div class="label_group">
             <label>
                 <span class="field">Estado:</span>
-                <input class="radius" type="text" name="occupation"
+                <input class="radius" type="text" name="state"
                        value="<?= $person->occupation ?? null; ?>"/>
             </label>
 
             <label>
                 <span class="field">Cidade:</span>
-                <input class="radius" type="email" name="email"
+                <input class="radius" type="email" name="city"
                        value="<?= $person->email ?? null; ?>"/>
             </label>
           </div>
           <div class="label_group">
             <label>
                 <span class="field">Complemento:</span>
-                <input class="radius" type="text" name="occupation"
+                <input class="radius" type="text" name="complement"
                        value="<?= $person->occupation ?? null; ?>"/>
             </label>
           </div>
@@ -102,7 +102,7 @@
           <div class="label_group">
             <label>
                 <span class="field">Unidade de Medida:</span>
-                <select name="type" required>
+                <select name="measureType" required>
                     <option value="">Selecione</option>
                     <option value="">Alqueire</option>
                     <option value="">Metro 2</option>
