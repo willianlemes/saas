@@ -50,7 +50,7 @@
         <div class="label_group">
 
           <label>
-              <span class="field">Gênero:</span>
+              <span id="label-genre" class="field">Gênero:</span>
               <select id="genre" name="genre">
                   <option value="">Selecione</option>
                   <option <?= ($person ? ($person->genre == "male" ? "selected" : "") : ""); ?> value="male">&ofcir; Masculino</option>

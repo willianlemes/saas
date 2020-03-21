@@ -58,14 +58,16 @@ $(function () {
       $("#datebirth").text("Data de Nascimento");
       $("#rg").text("RG");
       $("#cpf").text("CPF");
-      $("#genre").prop('disabled', false);
+      $("#label-genre").show();      
+      $("#genre").show();
     }else {
       $("#name").text("Razão Social");
       $("#nickname").text("Nome Fantasia");
       $("#datebirth").text("Data de Fundação da Empresa");
       $("#rg").text("IE");
       $("#cpf").text("CNPJ");
-      $("#genre").prop('disabled', 'disabled');
+      $("#label-genre").hide();
+      $("#genre").hide();
       $("#genre").val("");
     }
   });
