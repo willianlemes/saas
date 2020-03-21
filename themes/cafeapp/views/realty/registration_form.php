@@ -108,7 +108,7 @@
                 <select name="measureType">
                   <option value="">Selecione</option>
                   <?php foreach ($measureType as $key => $value): ?>
-                    <option <?= ($realty->measureType == $value ? 'selected' : '') ?> value="<?= $value ?>"><?= $value ?></option>
+                    <option <?= ($realty ? $realty->measureType == $value ? 'selected' : '' : '') ?> value="<?= $value ?>"><?= $value ?></option>
                   <?php endforeach; ?>
                 </select>
             </label>

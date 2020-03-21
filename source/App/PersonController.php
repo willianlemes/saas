@@ -103,13 +103,13 @@ class PersonController extends Controller
         $person->type = $data["type"];
         $person->name = $data["name"];
         $person->nickname = $data["nickname"];
-        $person->genre = $data["genre"];
+        $person->genre = ($person->type == 'F' ? $data["genre"] : '');
 
         if ($data["datebirth"]) {
             list($d, $m, $y) = explode("/", $data["datebirth"]);
             $person->datebirth = "{$y}-{$m}-{$d}";
         } else {
-            $person->datebirth = "";
+            $person->datebirth = '';
         }
 
         $person->rg = $data["rg"];
