@@ -18,21 +18,28 @@
         <?php endif; ?>
     <?php else: ?>
         <div class="app_launch_item header">
-            <p class="desc">Id</p>
-            <p class="date">Nome</p>
+            <p class="desc">Proprietário</p>
+            <p class="desc">Finalidade</p>
+            <p class="desc">Tipo</p>
         </div>
         <?php foreach ($properties as $property): ?>
             <article class="app_launch_item">
                 <p class="desc app_invoice_link transition">
-                    <a title="<?= $property->id; ?>"
+                    <a title="<?= $property->proprietary; ?>"
                        href="<?= url("/imoveis/alterar/{$property->id}") ?>">
-                       <?= $property->id; ?>
+                       <?= $property->proprietary; ?>
                      </a>
                 </p>
                 <p class="desc app_invoice_link transition">
-                  <a title="<?= $property->name; ?>"
+                  <a title="<?= $property->finality; ?>"
                      href="<?= url("/imoveis/alterar/{$property->id}"); ?>">
-                     <?= str_limit_words($property->name, 3, "&nbsp;<span class='icon-info icon-notext'></span>") ?>
+                     <?= $property->finality ?>
+                  </a>
+                </p>
+                <p class="desc app_invoice_link transition">
+                  <a title="<?= $property->kind; ?>"
+                     href="<?= url("/imoveis/alterar/{$property->id}"); ?>">
+                     <?= $property->kind ?>
                   </a>
                 </p>
             </article>

@@ -134,7 +134,7 @@
         <div class="label_group">
           <label>
               <span class="field">Estado:</span>
-              <select class="states" name="state" size="1"
+              <select class="states" name="state"
                       data-url="<?= url("/storage/estados_cidades.json") ?>"
                       data-value="<?= $person->state ?? null; ?>">
               </select>

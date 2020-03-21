@@ -34,8 +34,8 @@ class RealtyController extends Controller
             false
         );
 
-        $properties = (new Realty())->find();
-        $pager = new Pager(url("/imovel/p/"));
+        $properties = (new Realty())->list();
+        $pager = new Pager(url("/imoveis/p/"));
         $pager->pager($properties->count(), 7, ($data['page'] ?? 1));
 
         echo $this->view->render("views/realty/index", [
@@ -51,8 +51,15 @@ class RealtyController extends Controller
         ]);
     }
 
-    public function registrationForm(): void
+    public function registrationForm(? array $data): void
     {
+        if (!empty($data["id"])) {
+            $id = filter_var($data["id"], FILTER_VALIDATE_INT);
+            $realty = (new Realty())->findById($id);
+        } else {
+            $realty = null;
+        }
+
         $head = $this->seo->render(
             "Cadastro de Imóveis - " . CONF_SITE_NAME,
             CONF_SITE_DESC,
@@ -62,11 +69,13 @@ class RealtyController extends Controller
         );
 
         $people = (new Person())->find(null, null, 'id,name')->fetch(true);
+
         $finality = [
            "Venda",
            "Troca"
         ];
-        $types = [
+
+        $kinds = [
           "Casa",
           "Ponto Comercial",
           "Barracão",
@@ -77,27 +86,71 @@ class RealtyController extends Controller
           "Chácara"
         ];
 
+        $measureType = [
+                        "Alqueire",
+                        "Metro 2",
+                        "Hectare",
+                        "Km",
+                        "Metro"
+                      ];
+
         echo $this->view->render("views/realty/registration_form", [
-        "head" => $head,
-        "people" => $people,
-        "finality" => $finality,
-        "types" => $types
-      ]);
+                                 "head" => $head,
+                                 "people" => $people,
+                                 "finality" => $finality,
+                                 "kinds" => $kinds,
+                                 "realty" => $realty,
+                                 "measureType" => $measureType
+                               ]);
     }
 
     public function save(array $data):void
     {
-        $realty = new Realty();
-        $realty->name = $data["propety"];
+        if ($data['price'] == 0) {
+            $json["message"] = $this->message->warning('Por favor, informe o preço do imóvel.')->render();
+            echo json_encode($json);
+            return;
+        }
+
+        if (empty($data["id"])) {
+            $realty = new Realty();
+            $message = "Imovel criado com sucesso!";
+        } else {
+            $id = filter_var($data["id"], FILTER_VALIDATE_INT);
+            $realty = (new Realty())->findById($id);
+            $message = "Imovel atualizado com sucesso!";
+        }
+
+        //Sobre o Imóvel
+        $realty->proprietary = $data["proprietary"];
         $realty->finality = $data["finality"];
-        $realty->type = $data["type"];
-        $realty->value = $data["value"];
-        $realty->occupation = $data["occupation"];
-        $realty->email = $data["email"];
+        $realty->kind = $data["kind"];
+        $realty->price = str_replace([".", ","], ["", "."], $data["price"]);
+
+        //Localização
+        $realty->street = $data["street"];
+        $realty->number = $data["number"];
         $realty->neighborhood = $data["neighborhood"];
         $realty->cep = $data["cep"];
+        $realty->state = $data["state"];
+        $realty->city = (isset($data["city"]) ? $data["city"] : '');
         $realty->complement = $data["complement"];
-        $realty->city = $data["city"];
+        $realty->situation = "Ativo";
+
+        //Área
+        $realty->measureType = $data["measureType"];
+        $realty->zoneFront = $data["zoneFront"];
+        $realty->zoneBottom = $data["zoneBottom"];
+        $realty->zoneLeft = $data["zoneLeft"];
+        $realty->zoneRight = $data["zoneRight"];
+
+        //Características
+        $realty->numberDorms = filter_var($data["numberDorms"], FILTER_VALIDATE_INT);
+        $realty->numberSuites = filter_var($data["numberSuites"], FILTER_VALIDATE_INT);
+        $realty->numberBathrooms = filter_var($data["numberBathrooms"], FILTER_VALIDATE_INT);
+        $realty->numberRoom = filter_var($data["numberRoom"], FILTER_VALIDATE_INT);
+        $realty->carsCapacity = filter_var($data["carsCapacity"], FILTER_VALIDATE_INT);
+        $realty->isFurnished = $data["isFurnished"];
 
         if (!$realty->save()) {
             $json["message"] = $realty->message()->render();
@@ -105,13 +158,13 @@ class RealtyController extends Controller
             return;
         }
 
-        $this->message->success("Imovel criado com sucesso!")->flash();
-        $json["redirect"] = url("/imovel");
+        $this->message->success($message)->flash();
+        $json["redirect"] = url("/imoveis");
         echo json_encode($json);
         return;
     }
 
-    public function proprietary($data)
+    public function proprietary(? array $data)
     {
         $term = "%{$data['term']}%";
         $proprietary = (new Person())->find("name LIKE :term", "term={$term}", "id, name")->fetch(true);
@@ -122,6 +175,8 @@ class RealtyController extends Controller
                            'label' => $property->name,
                            'id' => $property->id];
         }
-        echo json_encode($response, JSON_UNESCAPED_UNICODE);
+        if ($proprietary) {
+            echo json_encode($response, JSON_UNESCAPED_UNICODE);
+        }
     }
 }

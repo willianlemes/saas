@@ -1,21 +1,30 @@
 $(function () {
 
-  $.fn.addSelected = function(name) {
+  $.fn.loadProprietary = function() {
+    if ($('input[name=proprietary]').val()=='') {
+      removeTag();
+    }else {
+      addTag();
+    }
+  }
 
+  function addTag()
+  {
     $('<span>', {class: 'tag'}).append(
-      $('<span>', {class: 'tag-text'}).text(name),
-      $('<button>', {class: 'tag-remove'})
+      $('<span>', {class: 'tag-text'}).text($('.tag-input').val()),
+      $('<button>', {class: 'tag-remove'}).click(function(){
+        removeTag();
+      })
     ).insertBefore('#addTag');
 
-    $('.autocomplete').attr('type','hidden');
+    $('.tag-input').attr('type','hidden');
+  }
 
-    $('.tag-remove').click(function() {
-      $('.tag').remove();
-      $('.autocomplete').attr('type','text');
-      $('.tag-input').val("");
-    });
-
-  };
+  function removeTag()
+  {
+    $('.tag').remove();
+    $('.tag-input').val("").attr('type','text');;
+  }
 
   var urlSearch = $('.autocomplete').data('urlSearch');
 
@@ -33,8 +42,8 @@ $(function () {
         });
       },
       select: function( event, ui ) {
-        $('input[name=property]').val(ui.item.id);
-        $(this).addSelected(ui.item.label);
+        $('input[name=proprietary]').val(ui.item.id);
+        addTag();
       }
    });
 
@@ -211,6 +220,7 @@ $(function () {
     $(".mask-date").mask('00/00/0000', {reverse: true});
     $(".mask-month").mask('00/0000', {reverse: true});
     $(".mask-doc").mask('000.000.000-00', {reverse: true});
+    $(".mask-cep").mask('00000-000', {reverse: true, placeholder: "00000-000"});
 
     /*
      * AJAX FORM
@@ -284,11 +294,11 @@ $(function () {
         });
     });
 
-    $(document).ajaxError(function(event, jqxhr, ajaxOptions, errorThrown) {
+    $(document).ajaxError(function( event, jqxhr, settings, thrownError ) {
             var contentType   = jqxhr.getResponseHeader("Content-Type");
-            var responseBody  = jqxhr.responseText;
+            // var responseBody  = jqXHR.responseText;
 
-            console.log(responseBody);
+            // console.log(jqxhr);
 
             //do something depending on response headers and response body.
     });
