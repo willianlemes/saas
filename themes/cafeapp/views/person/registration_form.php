@@ -14,7 +14,7 @@
               <span class="field">Perfil:</span>
               <select name="profile">
                 <?php foreach ($profiles as $key => $value): ?>
-                    <option value="<?= $key ?>" <?= ($person ? ($person->perfil === $key ? "selected" : "") : "")  ?>>
+                    <option value="<?= $key ?>" <?= ($person ? ($person->profile == $key ? 'selected' : '') : '')  ?>>
                       <?= $value ?>
                     </option>
                 <?php endforeach; ?>
@@ -25,7 +25,7 @@
               <span class="field">Tipo:</span>
               <select class="types" name="type">
                 <?php foreach ($types as $key => $value): ?>
-                  <option value="<?= $key ?>" <?= ($person ? ($person->type === $key ? "selected" : "") : "")  ?>>
+                  <option value="<?= $key ?>" <?= ($person ? ($person->type == $key ? 'selected' : "") : "")  ?>>
                     <?= $value ?>
                   </option>
                 <?php endforeach; ?>
@@ -160,3 +160,11 @@
         </div>
     </form>
 </div>
+
+<?php $v->start('scripts') ?>
+  <script type="text/javascript">
+    $(function () {
+      $( ".types" ).trigger("change");
+    });
+  </script>
+<?php $v->stop() ?>

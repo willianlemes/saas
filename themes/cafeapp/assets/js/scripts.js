@@ -4,14 +4,14 @@ $(function () {
     if ($('input[name=proprietary]').val()=='') {
       removeTag();
     }else {
-      addTag();
+      addTag($('.tag-input').val());
     }
   }
 
-  function addTag()
+  function addTag(value)
   {
     $('<span>', {class: 'tag'}).append(
-      $('<span>', {class: 'tag-text'}).text($('.tag-input').val()),
+      $('<span>', {class: 'tag-text'}).text(value),
       $('<button>', {class: 'tag-remove'}).click(function(){
         removeTag();
       })
@@ -43,7 +43,7 @@ $(function () {
       },
       select: function( event, ui ) {
         $('input[name=proprietary]').val(ui.item.id);
-        addTag();
+        addTag(ui.item.value);
       }
    });
 

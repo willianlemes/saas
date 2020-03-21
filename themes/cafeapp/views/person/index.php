@@ -23,13 +23,13 @@
             <article class="app_launch_item">
                 <p class="desc app_invoice_link transition">
                     <a title="<?= $person->name; ?>"
-                       href="<?= url("/imoveis/alterar/{$person->id}") ?>">
+                       href="<?= url("/pessoas/alterar/{$person->id}") ?>">
                        <?= $person->name; ?>
                      </a>
                 </p>
                 <p class="desc app_invoice_link transition">
                   <a title="<?= $person->nickname; ?>"
-                     href="<?= url("/imoveis/alterar/{$person->id}"); ?>">
+                     href="<?= url("/pessoas/alterar/{$person->id}"); ?>">
                      <?= $person->nickname ?>
                   </a>
                 </p>

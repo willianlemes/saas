@@ -123,6 +123,7 @@ abstract class Model
      */
     public function find(?string $terms = null, ?string $params = null, string $columns = "*")
     {
+        header('Content-Type: text/html; charset=utf-8');
         if ($terms) {
             $this->query = "SELECT {$columns} FROM " . static::$entity . " WHERE {$terms}";
             parse_str($params, $this->params);

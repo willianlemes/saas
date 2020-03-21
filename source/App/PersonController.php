@@ -90,10 +90,10 @@ class PersonController extends Controller
         if (!empty($data["id"])) {
             $id = filter_var($data["id"], FILTER_VALIDATE_INT);
             $person = (new Person())->findById($id);
-            $message = "Pessoa atualizado com sucesso!";
+            $message = "Pessoa atualizada com sucesso!";
         } else {
             $person = new Person();
-            $message = "Pessoa criado com sucesso!";
+            $message = "Pessoa criada com sucesso!";
         }
 
         $data = filter_var_array($data, FILTER_SANITIZE_STRIPPED);
@@ -151,7 +151,7 @@ class PersonController extends Controller
             return;
         }
 
-        $json["message"] = $this->message->success($message)->render();
+        $json["message"] = $this->message->success($message)->flash();
         $json["redirect"] = url("/pessoas");
         echo json_encode($json);
         return;
