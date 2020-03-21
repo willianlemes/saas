@@ -4,7 +4,7 @@
     <div class="auth_content container content">
         <header class="auth_header">
             <h1>Cadastre-se</h1>
-            <p>Já tem uma conta? <a title="Fazer login!" href="<?= url("/entrar"); ?>">Fazer login!</a></p>
+            <p>Já tem uma conta? <a title="Fazer login!" href="<?= url("/"); ?>">Fazer login!</a></p>
         </header>
 
         <form class="auth_form" action="<?= url("/cadastrar"); ?>" method="post" enctype="multipart/form-data">
@@ -31,7 +31,7 @@
                 <input type="password" name="password" placeholder="Informe sua senha:" required/>
             </label>
 
-            <button class="auth_form_btn transition gradient gradient-green gradient-hover"><?= url("/cadastrar"); ?></button>
+            <button class="auth_form_btn transition gradient gradient-green gradient-hover">Cadastrar</button>
         </form>
     </div>
 </article>

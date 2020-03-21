@@ -1,8 +1,5 @@
 <?php $v->layout("_theme"); ?>
 
-
-
-
 <div class="app_launch_header">
   <a class="app_launch_btn income radius transition icon-plus-circle" href="<?= url('/imoveis/cadastrar') ?>">
     Novo

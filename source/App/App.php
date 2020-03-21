@@ -249,10 +249,6 @@ class App extends Controller
         ]);
     }
 
-    public function properties():void
-    {
-    }
-
     /**
      *
      */
@@ -607,6 +603,6 @@ class App extends Controller
         $this->message->info("Você saiu com sucesso " . Auth::user()->first_name . ". Volte logo :)")->flash();
 
         Auth::logout();
-        redirect("/entrar");
+        redirect("/");
     }
 }

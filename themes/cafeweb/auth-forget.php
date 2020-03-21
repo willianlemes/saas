@@ -16,7 +16,7 @@
             <label>
                 <div>
                     <span class="icon-envelope">Email:</span>
-                    <span><a title="Voltar e entrar!" href="<?= url("/entrar"); ?>">Voltar e entrar!</a></span>
+                    <span><a title="Voltar e entrar!" href="<?= url("/"); ?>">Voltar e entrar!</a></span>
                 </div>
                 <input type="email" name="email" placeholder="Informe seu e-mail:" required/>
             </label>

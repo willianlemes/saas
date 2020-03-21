@@ -25,11 +25,11 @@ define("CONF_URL_ADMIN", "/admin");
 /**
  * SITE
  */
-define("CONF_SITE_NAME", "CaféControl");
-define("CONF_SITE_TITLE", "Gerencie suas contas com o melhor café");
+define("CONF_SITE_NAME", "EasyImóveis");
+define("CONF_SITE_TITLE", "Gerencie seus imóveis com facilidade.");
 define(
     "CONF_SITE_DESC",
-    "Teste"
+    "O melhor sistema de gestão de imóveis para corretores e imobiliárias."
 );
 define("CONF_SITE_LANG", "pt_BR");
 define("CONF_SITE_DOMAIN", "upinside.com.br");

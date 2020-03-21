@@ -34,7 +34,13 @@ class RealtyController extends Controller
             false
         );
 
-        $properties = (new Realty())->list();
+        $properties = (new Realty())->
+        find(
+            "user_id = :user",
+            "user={$this->user->id}",
+            "id, (SELECT name FROM person WHERE person.id = properties.proprietary) AS proprietary, " .
+            "kind, finality "
+        );
         $pager = new Pager(url("/imoveis/p/"));
         $pager->pager($properties->count(), 7, ($data['page'] ?? 1));
 
@@ -121,6 +127,9 @@ class RealtyController extends Controller
             $message = "Imovel atualizado com sucesso!";
         }
 
+        $data = filter_var_array($data, FILTER_SANITIZE_STRIPPED);
+
+        $realty->user_id = $this->user->id; //Vincular cadastro do imóvel ao usuário logado
         //Sobre o Imóvel
         $realty->proprietary = $data["proprietary"];
         $realty->finality = $data["finality"];

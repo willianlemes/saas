@@ -75,8 +75,8 @@
 
           <label>
               <span id="cpf" class="field">CPF:</span>
-              <input class="radius mask-cpf" type="text" name="cpf" placeholder="Apenas números"
-                     value="<?= $user->cpf ?? null; ?>"/>
+              <input class="radius mask-cpf" type="text" name="cpf"
+                     value="<?= $person->cpf ?? null; ?>"/>
           </label>
         </div>
 
@@ -97,13 +97,13 @@
         <div class="label_group">
           <label>
               <span class="field">Telefone:</span>
-              <input class="radius mask-fone" type="text" name="phone" placeholder="Apenas números"
+              <input class="radius mask-phone" type="text" name="phone" placeholder="Apenas números"
                      value="<?= $person->phone ?? null; ?>"/>
           </label>
 
           <label>
               <span class="field">Celular:</span>
-              <input class="radius mask-cel" type="text" name="cellphone" placeholder="Apenas números"
+              <input class="radius mask-cellphone" type="text" name="cellphone" placeholder="Apenas números"
                      value="<?= $person->cellphone ?? null; ?>"/>
           </label>
         </div>
@@ -128,6 +128,11 @@
               <span class="field">Bairro:</span>
               <input class="radius" type="text" name="neighborhood"
                      value="<?= $person->neighborhood ?? null; ?>"/>
+          </label>
+          <label>
+              <span class="field">CEP:</span>
+              <input class="radius mask-cep" type="text" name="cep"
+                     value="<?= $person->cep ?? null; ?>"/>
           </label>
         </div>
 

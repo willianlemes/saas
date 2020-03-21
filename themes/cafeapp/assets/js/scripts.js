@@ -221,6 +221,10 @@ $(function () {
     $(".mask-month").mask('00/0000', {reverse: true});
     $(".mask-doc").mask('000.000.000-00', {reverse: true});
     $(".mask-cep").mask('00000-000', {reverse: true, placeholder: "00000-000"});
+    $(".mask-cpf").mask('000.000.000-00', {reverse: true, placeholder: "000.000.000-00"});
+    $(".mask-rg").mask('00.000.000-0', {reverse: true, placeholder: "00.000.000-0"});
+    $(".mask-phone").mask('(000)0000-0000', {reverse: true, placeholder: "(000)0000-0000"});
+    $(".mask-cellphone").mask('(000)00000-0000', {reverse: true, placeholder: "(000)00000-0000"});
 
     /*
      * AJAX FORM

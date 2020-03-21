@@ -36,7 +36,10 @@ class PersonController extends Controller
             false
         );
 
-        $people = (new Person())->find();
+        $people = (new Person())->find(
+            "user_id = :user",
+            "user={$this->user->id}"
+        );
         $pager = new Pager(url("/pessoas/p/"));
         $pager->pager($people->count(), 7, ($data['page'] ?? 1));
 
@@ -95,6 +98,7 @@ class PersonController extends Controller
 
         $data = filter_var_array($data, FILTER_SANITIZE_STRIPPED);
 
+        $person->user_id = $this->user->id;
         $person->profile = $data["profile"];
         $person->type = $data["type"];
         $person->name = $data["name"];

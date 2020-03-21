@@ -20,7 +20,7 @@
 
 <div class="app">
     <header class="app_header">
-        <h1><a class="icon-coffee transition" href="<?= url("/app"); ?>" title="CaféApp">CaféApp</a></h1>
+        <h1><a class="icon-home transition" href="<?= url("/app"); ?>" title="EasyImóveis">EasyImóveis</a></h1>
         <ul class="app_header_widget">
             <li data-modalopen=".app_modal_contact" class="radius transition icon-life-ring">Precisa de ajuda?</li>
             <li data-mobilemenu="open" class="app_header_widget_mobile radius transition icon-menu icon-notext"></li>
@@ -56,9 +56,9 @@
     </div>
 
     <footer class="app_footer">
-        <span class="icon-coffee">
-            CaféApp - Desenvolvido na formação FSPHP<br>
-            &copy; UpInside - Todos os direitos reservados
+        <span class="icon-home">
+            EasyImóveis - Desenvolvido por Willian Lemes<br>
+            &copy; EasyImóveis - Todos os direitos reservados
         </span>
     </footer>
 

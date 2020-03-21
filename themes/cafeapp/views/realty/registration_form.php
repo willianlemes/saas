@@ -86,7 +86,7 @@
             <label>
                 <span class="field">Cidade:</span>
                 <select class="cities" name="city"
-                        data-value="<?= $person->city ?? null; ?>">
+                        data-value="<?= $realty->city ?? null; ?>">
                 </select>
             </label>
           </div>
