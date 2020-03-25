@@ -2,8 +2,9 @@
 
 <div class="app_formbox app_widget">
     <form class="app_form" action="<?= url("/pessoas/salvar"); ?>" method="post">
+      <fieldset>
+        <legend>Identificação</legend>
         <input type="hidden" name="id" value="<?= $person->id ?? null ?>"/>
-
         <div class="app_formbox_photo">
             <div class="rounded j_profile_image thumb" style="background-image: url('<?= $photo ?? null; ?>')"></div>
             <div><input data-image=".j_profile_image" type="file" class="radius"  name="photo"/></div>
@@ -48,7 +49,6 @@
         </div>
 
         <div class="label_group">
-
           <label>
               <span id="label-genre" class="field">Gênero:</span>
               <select id="genre" name="genre">
@@ -58,7 +58,6 @@
                   <option <?= ($person ? ($person->genre == "other" ? "selected" : "") : ""); ?> value="other">&ofcir; Outro</option>
               </select>
           </label>
-
           <label>
               <span id="datebirth" class="field">Data de Nascimento:</span>
               <input class="radius mask-date" type="text" name="datebirth" placeholder="dd/mm/yyyy"
@@ -68,32 +67,27 @@
 
         <div class="label_group">
           <label>
-              <span id="rg" class="field">RG:</span>
-              <input class="radius mask-rg" type="text" name="rg" placeholder="Apenas números"
+              <span id="label-rg" class="field">RG:</span>
+              <input id="rgIe" class="radius" type="text" name="rg" placeholder="Apenas números"
                      value="<?= $person->rg ?? null; ?>"/>
           </label>
 
           <label>
-              <span id="cpf" class="field">CPF:</span>
-              <input class="radius mask-cpf" type="text" name="cpf"
+              <span id="label-cpf" class="field">CPF:</span>
+              <input id="cpf" class="radius mask-cpf-cnpj" type="text" name="cpf"
                      value="<?= $person->cpf ?? null; ?>"/>
           </label>
         </div>
-
         <div class="label_group">
           <label>
               <span class="field">Profissão:</span>
               <input class="radius" type="text" name="occupation"
                      value="<?= $person->occupation ?? null; ?>"/>
           </label>
-
-          <label>
-              <span class="field">E-mail:</span>
-              <input class="radius" type="email" name="email"
-                     value="<?= $person->email ?? null; ?>"/>
-          </label>
         </div>
-
+        </fieldset>
+        <fieldset>
+        <legend>Contato</legend>
         <div class="label_group">
           <label>
               <span class="field">Telefone:</span>
@@ -107,12 +101,21 @@
                      value="<?= $person->cellphone ?? null; ?>"/>
           </label>
         </div>
-
+        <div class="label_group">
+          <label>
+              <span class="field">E-mail:</span>
+              <input class="radius" type="email" name="email"
+                     value="<?= $person->email ?? null; ?>"/>
+          </label>
+        </div>
+        </fieldset>
+        <fieldset>
+        <legend>Endereço</legend>            
         <div class="label_group">
           <label>
               <span class="field">Logradouro:</span>
               <input class="radius" type="text" name="street"
-                     value="<?= $person->street ?? null; ?>"/>
+                     value="<?= $person->street ?? null; ?>" placeholder="rua, avenida ..." />
           </label>
 
           <label>
@@ -152,6 +155,7 @@
               </select>
           </label>
         </div>
+        </fieldset>
 
         <div class="al-center">
             <div class="app_formbox_actions">

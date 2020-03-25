@@ -16,8 +16,8 @@
         <?php endif; ?>
     <?php else: ?>
         <div class="app_launch_item header">
-            <p class="desc">Nome</p>
-            <p class="desc">Apelido</p>
+            <p class="desc">Nome / Razão Social</p>
+            <p class="desc">Apelido / Nome Fantasia</p>
         </div>
         <?php foreach ($people as $person): ?>
             <article class="app_launch_item">

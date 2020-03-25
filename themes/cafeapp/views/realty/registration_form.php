@@ -2,10 +2,10 @@
 
 <div class="app_formbox app_widget">
     <form class="app_form" action="<?= url("/imoveis/salvar"); ?>" method="post">
-      <fieldset>
-        <input type="hidden" name="id" value="<?= $realty->id ?? null ?>">
+      <fieldset>        
         <legend>Sobre o Imóvel</legend>
-        <span class="field">Proprietário:</span>
+        <input type="hidden" name="id" value="<?= $realty->id ?? null ?>">
+        <span class="field">Proprietário: (Nome / Apelido)</span>
         <div class="tagsinput">
           <div id="addTag" >
             <input type="hidden" name="proprietary"

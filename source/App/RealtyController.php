@@ -173,23 +173,27 @@ class RealtyController extends Controller
         return;
     }
 
-    public function proprietary(? array $data)
+    public function proprietary(? array $data): void
     {
         if (empty($data['term'])) {
             echo null;
-            exit();
+            return;
         }
 
         $data['term'] = filter_var(trim($data['term']), FILTER_SANITIZE_STRIPPED);
         $term = "%{$data['term']}%";
-        $proprietary = (new Person())->find("user_id = {$this->user->id} AND name LIKE '{$term}'", null, "id, name")->fetch(true);
-        
+        $proprietary = (new Person())->find(
+            "user_id = {$this->user->id} AND (name LIKE '{$term}' OR nickname LIKE '{$term}')",
+            null,
+            "id, name, nickname"
+        )->fetch(true);
+
         if ($proprietary) {
             $response = [];
             foreach ($proprietary as $property) {
                 $response[] = [
-                               'value' => $property->name,
-                               'label' => $property->name,
+                               'value' => "{$property->name} / {$property->nickname}",
+                               'label' => "{$property->name} / {$property->nickname}",
                                'id' => $property->id
                               ];
             }

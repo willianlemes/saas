@@ -1,5 +1,19 @@
 $(function () {
 
+  $('.tag-input').focusout(function() {
+    if ($('input[name=proprietary]').val()=='' & $('.tag-input').val()!=='') {
+      $('.tagsinput').addClass('input-error');
+    }else {
+      $('.tagsinput').removeClass('input-error');
+    }
+  });
+
+  $('input[type=number]').change(function(){
+    if ($(this).val()<0) {
+      $(this).val(0);
+    }
+  }).prop('min',0);
+
   $.fn.loadProprietary = function() {
     if ($('input[name=proprietary]').val()=='') {
       removeTag();
@@ -23,7 +37,8 @@ $(function () {
   function removeTag()
   {
     $('.tag').remove();
-    $('.tag-input').val("").attr('type','text');;
+    $('.tag-input').val("").attr('type','text');
+    $('input[name=proprietary]').val("");
   }
 
   var urlSearch = $('.autocomplete').data('urlSearch');
@@ -52,24 +67,30 @@ $(function () {
   });
 
   $(".types").change(function(){
+    var maskCpfCnpj = '';
+    var maskRgIe = '';
     if ($(this).val()==="F") {
       $("#name").text("Nome");
       $("#nickname").text("Apelido");
       $("#datebirth").text("Data de Nascimento");
-      $("#rg").text("RG");
-      $("#cpf").text("CPF");
-      $("#label-genre").show();      
+      $("#label-rg").text("RG");
+      $("#label-cpf").text("CPF");
+      $("#label-genre").show();
       $("#genre").show();
+      maskCpfCnpj = '000.000.000-00';
+      $("#rgIe").mask('00.000.000-0', {reverse: true, placeholder: '00.000.000-0'});
     }else {
       $("#name").text("Razão Social");
       $("#nickname").text("Nome Fantasia");
       $("#datebirth").text("Data de Fundação da Empresa");
-      $("#rg").text("IE");
-      $("#cpf").text("CNPJ");
+      $("#label-rg").text("IE");
+      $("#label-cpf").text("CNPJ");
       $("#label-genre").hide();
-      $("#genre").hide();
-      $("#genre").val("");
+      $("#genre").val("").hide();
+      maskCpfCnpj = '00.000.000/0000-00';
+      $('#rgIe').unmask();
     }
+    $(".mask-cpf-cnpj").mask(maskCpfCnpj, {reverse: true, placeholder: maskCpfCnpj});
   });
 
   var url = $(".states").data("url");
@@ -219,14 +240,15 @@ $(function () {
      * jQuery MASK
      */
     $(".mask-money").mask('000.000.000.000.000,00', {reverse: true, placeholder: "0,00"});
-    $(".mask-date").mask('00/00/0000', {reverse: true});
+    $(".mask-date").mask('00/00/0000', {reverse: true, placeholder: "__/__/____"});
     $(".mask-month").mask('00/0000', {reverse: true});
     $(".mask-doc").mask('000.000.000-00', {reverse: true});
     $(".mask-cep").mask('00000-000', {reverse: true, placeholder: "00000-000"});
     $(".mask-cpf").mask('000.000.000-00', {reverse: true, placeholder: "000.000.000-00"});
+    $(".mask-cnpj").mask('00.000.000/0000-00', {reverse: true, placeholder: "00.000.000/0000-00"});
     $(".mask-rg").mask('00.000.000-0', {reverse: true, placeholder: "00.000.000-0"});
-    $(".mask-phone").mask('(000)0000-0000', {reverse: false, placeholder: "(000)0000-0000"});
-    $(".mask-cellphone").mask('(000)00000-0000', {reverse: false, placeholder: "(000)00000-0000"});
+    $(".mask-phone").mask('(00) 0000-0000', {reverse: false, placeholder: "(00) 0000-0000"});
+    $(".mask-cellphone").mask('(00) 00000-0000', {reverse: false, placeholder: "(00) 00000-0000"});
 
     /*
      * AJAX FORM

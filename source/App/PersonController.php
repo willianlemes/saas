@@ -77,9 +77,15 @@ class PersonController extends Controller
             false
         );
 
+        $avatar = theme("/assets/images/avatar.jpg", CONF_VIEW_APP);
+
         echo $this->view->render("views/person/registration_form", [
           "head" => $head,
           "person" => $person,
+          "photo" => ($person ? $person->photo() ?
+                                image($person->photo, 360, 360) :
+                                $avatar :
+                      $avatar),
           "profiles" => $profiles,
           "types" => $types
         ]);
@@ -87,6 +93,12 @@ class PersonController extends Controller
 
     public function save(array $data):void
     {
+        if (strtotime($data["datebirth"]) > time()) {
+            $json["message"] = $this->message->warning('A data de nascimento não pode ser maior que hoje.')->flash();
+            echo json_encode($json);
+            return;
+        }
+
         if (!empty($data["id"])) {
             $id = filter_var($data["id"], FILTER_VALIDATE_INT);
             $person = (new Person())->findById($id);
@@ -121,6 +133,7 @@ class PersonController extends Controller
         $person->street = $data["street"];
         $person->street_number = $data["street_number"];
         $person->neighborhood = $data["neighborhood"];
+        $person->cep = $data["cep"];
         $person->state = $data["state"];
 
         if (isset($data["city"])) {
