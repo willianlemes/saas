@@ -93,12 +93,6 @@ class PersonController extends Controller
 
     public function save(array $data):void
     {
-        if (strtotime($data["datebirth"]) > time()) {
-            $json["message"] = $this->message->warning('A data de nascimento não pode ser maior que hoje.')->flash();
-            echo json_encode($json);
-            return;
-        }
-
         if (!empty($data["id"])) {
             $id = filter_var($data["id"], FILTER_VALIDATE_INT);
             $person = (new Person())->findById($id);

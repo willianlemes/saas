@@ -65,11 +65,13 @@ $route->post("/profile", "App:profile");
  */
  $route->group("/imoveis");
  $route->get("/", "RealtyController:index");
+ $route->get("/{finality}/{kind}", "RealtyController:index");
  $route->get("/p/{page}", "RealtyController:index");
  $route->get("/cadastrar", "RealtyController:registrationForm");
  $route->get("/alterar/{id}", "RealtyController:registrationForm");
  $route->post("/salvar", "RealtyController:save");
  $route->get("/proprietarios/{term}", "RealtyController:proprietary");
+ $route->post("/filter", "RealtyController:filter");
 
  /**
  * PERSON

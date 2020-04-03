@@ -13,6 +13,17 @@ class RealtyController extends Controller
 {
     /** @var User */
     private $user;
+    private const FINALITY = ["Venda", "Troca"];
+    private const KIND = [
+                          "Casa",
+                          "Ponto Comercial",
+                          "Barracão",
+                          "Terreno",
+                          "Sobrado",
+                          "Sítio",
+                          "Fazenda",
+                          "Chácara"
+                         ];
 
     public function __construct()
     {
@@ -43,16 +54,23 @@ class RealtyController extends Controller
         );
         $pager = new Pager(url("/imoveis/p/"));
         $pager->pager($properties->count(), 7, ($data['page'] ?? 1));
+        $properties = (new Realty)->filter(
+            $this->user,
+            $data,
+            $pager->limit(),
+            $pager->offset()
+        );
 
         echo $this->view->render("views/realty/index", [
         "user" => $this->user,
         "head" => $head,
-        "properties" => $properties->limit($pager->limit())->offset($pager->offset())->fetch(true),
+        "finality" => RealtyController::FINALITY,
+        "kinds" => RealtyController::KIND,
+        "properties" => $properties,
         "paginator" => $pager->render(),
         "filter" => (object)[
-            "status" => ($data["status"] ?? null),
-            "category" => ($data["category"] ?? null),
-            "date" => (!empty($data["date"]) ? str_replace("-", "/", $data["date"]) : null)
+            "finality" => ($data["finality"] ?? null),
+            "kind" => ($data["kind"] ?? null)
           ]
         ]);
     }
@@ -76,21 +94,6 @@ class RealtyController extends Controller
 
         $people = (new Person())->find(null, null, 'id,name')->fetch(true);
 
-        $finality = [
-           "Venda",
-           "Troca"
-        ];
-
-        $kinds = [
-          "Casa",
-          "Ponto Comercial",
-          "Barracão",
-          "Terreno",
-          "Sobrado",
-          "Sítio",
-          "Fazenda",
-          "Chácara"
-        ];
 
         $measureType = [
                         "Alqueire",
@@ -103,8 +106,8 @@ class RealtyController extends Controller
         echo $this->view->render("views/realty/registration_form", [
                                  "head" => $head,
                                  "people" => $people,
-                                 "finality" => $finality,
-                                 "kinds" => $kinds,
+                                 "finality" => RealtyController::FINALITY,
+                                 "kinds" => RealtyController::KIND,
                                  "realty" => $realty,
                                  "measureType" => $measureType
                                ]);
@@ -200,5 +203,13 @@ class RealtyController extends Controller
             echo json_encode($response, JSON_UNESCAPED_UNICODE);
         }
         echo null;
+    }
+
+    public function filter(?array $data)
+    {
+        $finality = (!empty($data["finality"]) ? $data["finality"] : "Todas");
+        $kind = (!empty($data["kind"]) ? $data["kind"] : "Todos");
+        $json["redirect"] = url("/imoveis/{$finality}/{$kind}");
+        echo json_encode($json);
     }
 }

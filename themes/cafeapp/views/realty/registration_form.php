@@ -2,7 +2,7 @@
 
 <div class="app_formbox app_widget">
     <form class="app_form" action="<?= url("/imoveis/salvar"); ?>" method="post">
-      <fieldset>        
+      <fieldset>
         <legend>Sobre o Imóvel</legend>
         <input type="hidden" name="id" value="<?= $realty->id ?? null ?>">
         <span class="field">Proprietário: (Nome / Apelido)</span>
@@ -21,7 +21,7 @@
               <span class="field">Finalidade:</span>
               <select name="finality" required>
                   <option value="">Selecione</option>
-                  <?php foreach ($finality as $key => $value): ?>
+                  <?php foreach ($finality as $value): ?>
                     <option <?= ($realty ? ($realty->finality == $value ? 'selected' : '') : '') ?> value="<?= $value ?>"><?= $value ?></option>
                   <?php endforeach; ?>
               </select>

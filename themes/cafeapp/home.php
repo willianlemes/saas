@@ -52,7 +52,7 @@
         <section class="app_main_right">
             <ul class="app_widget_shortcuts">
                 <li class="income radius transition" data-modalopen=".app_modal_income">
-                    <p class="icon-plus-circle">Receita</p>
+                    <p class="icon-plus-circle">teste</p>
                 </li>
                 <li class="expense radius transition" data-modalopen=".app_modal_expense">
                     <p class="icon-plus-circle">Despesa</p>
