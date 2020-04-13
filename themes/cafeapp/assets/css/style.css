@@ -45,7 +45,7 @@ body {
 }
 
 .app_form textarea {
-    resize: vertical;
+    resize: none;
 }
 
 .app_form input[type="date"] {
@@ -442,6 +442,7 @@ body {
     padding: var(--area-normal);
     background: #ffffff;
     margin-bottom: var(--area-box);
+    min-height: 345px;
 
     -webkit-border-radius: var(--radius-normal);
     -moz-border-radius: var(--radius-normal);
@@ -1142,4 +1143,33 @@ fieldset{
 .tagsinput .tag .tag-remove:after {
 	-webkit-transform: rotateZ(-45deg);
 	transform: rotateZ(-45deg);
+}
+
+.menu ul {
+    padding:0px;
+    margin:0px;
+    list-style:none;
+}
+
+.menu ul li
+{
+  display: inline;
+}
+
+.menu ul li a {
+    padding: var(--area-small) var(--area-normal);
+    display: inline-block;
+    border: 1px solid #333333;
+    cursor: pointer;
+    font-weight: var(--weight-bold);
+    font-size: var(--font-small);
+    border-color: var(--color-green);
+    color: var(--color-green);
+    text-decoration: none;
+}
+
+.menu a:hover,
+.menu a.active {
+  background-color: var(--color-green);
+  color: #ffffff;
 }

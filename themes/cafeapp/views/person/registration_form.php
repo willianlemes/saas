@@ -2,6 +2,9 @@
 
 <div class="app_formbox app_widget">
     <form class="app_form" action="<?= url("/pessoas/salvar"); ?>" method="post">
+      <header class="app_widget_title">
+          <h2 class="icon-user-plus">Cadastro de Pessoa</h2>
+      </header>
       <fieldset>
         <legend>Identificação</legend>
         <input type="hidden" name="id" value="<?= $person->id ?? null ?>"/>
@@ -110,7 +113,7 @@
         </div>
         </fieldset>
         <fieldset>
-        <legend>Endereço</legend>            
+        <legend>Endereço</legend>
         <div class="label_group">
           <label>
               <span class="field">Logradouro:</span>

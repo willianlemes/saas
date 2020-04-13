@@ -59,15 +59,8 @@ class PersonController extends Controller
             $person = null;
         }
 
-        $profiles = [
-          "customer" => "Cliente",
-          "broker" => "Corretor",
-          "owner" => "Proprietário",
-          "interested" => "Interessado",
-          "other" => "Outro"
-        ];
-
-        $types = ["F" => "Física", "J" => "Jurídica"];
+        $profiles = Person::PROFILES;
+        $types = Person::TYPES;
 
         $head = $this->seo->render(
             "Cadastro de Pessoas - " . CONF_SITE_NAME,

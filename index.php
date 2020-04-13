@@ -30,7 +30,9 @@ $route->group(null);
 $route->get("/confirma", "Web:confirm");
 $route->get("/obrigado/{email}", "Web:success");
 
-//services
+/**
+ * SERVICE
+ */
 $route->group(null);
 $route->get("/termos", "Web:terms");
 
@@ -38,25 +40,9 @@ $route->get("/termos", "Web:terms");
  * APP
  */
 $route->group("/app");
-$route->get("/", "App:home");
-$route->get("/receber", "App:income");
-$route->get("/receber/{status}/{category}/{date}", "App:income");
-$route->get("/pagar", "App:expense");
-$route->get("/pagar/{status}/{category}/{date}", "App:expense");
-
-
-$route->get("/fixas", "App:fixed");
-$route->get("/imoveis", "App:properties");
-
-$route->get("/fatura/{invoice}", "App:invoice");
 $route->get("/perfil", "App:profile");
 $route->get("/sair", "App:logout");
-
-$route->post("/launch", "App:launch");
-$route->post("/invoice/{invoice}", "App:invoice");
-$route->post("/remove/{invoice}", "App:remove");
 $route->post("/support", "App:support");
-$route->post("/onpaid", "App:onpaid");
 $route->post("/filter", "App:filter");
 $route->post("/profile", "App:profile");
 
@@ -82,6 +68,16 @@ $route->post("/profile", "App:profile");
  $route->get("/cadastrar", "PersonController:registrationForm");
  $route->get("/alterar/{id}", "PersonController:registrationForm");
  $route->post("/salvar", "PersonController:save");
+
+ /**
+ * BUSINESS
+ */
+ $route->group("/negocios");
+ $route->get("/", "BusinessController:index");
+ // $route->get("/p/{page}", "PersonController:index");
+ // $route->get("/cadastrar", "PersonController:registrationForm");
+ // $route->get("/alterar/{id}", "PersonController:registrationForm");
+ // $route->post("/salvar", "PersonController:save");
 
 /**
  * ERROR ROUTES

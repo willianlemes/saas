@@ -92,8 +92,7 @@ class RealtyController extends Controller
             false
         );
 
-        $people = (new Person())->find(null, null, 'id,name')->fetch(true);
-
+        $owners = (new Person())->find(null, null, 'id,name')->fetch(true);
 
         $measureType = [
                         "Alqueire",
@@ -105,7 +104,7 @@ class RealtyController extends Controller
 
         echo $this->view->render("views/realty/registration_form", [
                                  "head" => $head,
-                                 "people" => $people,
+                                 "owners" => $owners,
                                  "finality" => RealtyController::FINALITY,
                                  "kinds" => RealtyController::KIND,
                                  "realty" => $realty,

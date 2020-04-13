@@ -1,79 +1,55 @@
 <div class="app_modal_box app_modal_<?= $type; ?>">
     <p class="title icon-suitcase">Novo Negócio</p>
     <form class="app_form" action="<?= url("/app/launch"); ?>" method="post">
-        <input type="hidden" name="currency" value="BRL"/>
-        <input type="hidden" name="type" value="<?= $type; ?>"/>
-
+        <input type="hidden" name="id" value=""/>
         <label>
-            <span class="field icon-leanpub">Descrição:</span>
-            <input class="radius" type="text" name="description" placeholder="Ex: Aluguel" required/>
+          <span class="field icon-user">Cliente:</span>
+          <select class="select_box_customer" name="customer" required>
+            <option value="" disabled selected>Selecione</option>
+            <?php foreach ($owners as $owner): ?>
+              <option <?= ($realty ? ($realty->proprietary == $owner->id ? 'selected' : '') : '') ?> value="<?= $owner->id ?>"><?= $owner->name ?></option>
+            <?php endforeach; ?>
+          </select>
         </label>
 
+        <label>
+            <span class="field icon-leanpub">Título:</span>
+            <input class="radius" type="text" name="description" required/>
+        </label>
+
+        <label>
+          <span class="field icon-home">Imóvel:</span>
+          <select class="select_box_customer" name="customer" required>
+            <option value="" disabled selected>Selecione</option>
+            <?php foreach ($owners as $owner): ?>
+              <option <?= ($realty ? ($realty->proprietary == $owner->id ? 'selected' : '') : '') ?> value="<?= $owner->id ?>"><?= $owner->name ?></option>
+            <?php endforeach; ?>
+          </select>
+        </label>
+
+
         <div class="label_group">
-            <label>
-                <span class="field icon-money">Valor:</span>
-                <input class="radius mask-money" type="text" name="value" required/>
-            </label>
+          <label>
+              <span class="field icon-filter">Etapa:</span>
+              <select name="wallet">
+                <option value="contato">Contato</option>
+                <option value="visita">Visita</option>
+                <option value="proposta">Proposta</option>
+                <option value="negociacao">Negociação</option>
+              </select>
+          </label>
 
-            <label>
-                <span class="field icon-filter">Data:</span>
-                <input class="radius masc-date" type="date" name="due_at" required/>
-            </label>
-        </div>
-
-        <div class="label_group">
-            <label>
-                <span class="field icon-briefcase">Carteira:</span>
-                <select name="wallet">
-                    <?php foreach ($wallets as $wallet): ?>
-                        <option value="<?= $wallet->id; ?>">&ofcir; <?= $wallet->wallet ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </label>
-
-            <label>
-                <span class="field icon-filter">Categoria:</span>
-                <select name="category">
-                    <?php foreach ($categories as $category): ?>
-                        <option value="<?= $category->id; ?>">&ofcir; <?= $category->name; ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </label>
+          <label>
+              <span class="field icon-calendar-check-o">Fechamento Esperado:</span>
+              <input class="radius masc-date" type="date" name="due_at" required/>
+          </label>
         </div>
 
         <div class="label_check">
-            <p class="field icon-exchange">Repetição:</p>
-            <label class="check"
-                   data-checkbox="true"
-                   data-slideup=".app_modal_<?= $type; ?> .repeate_item_fixed, .app_modal_<?= $type; ?> .repeate_item_enrollment">
-                <input type="radio" name="repeat_when" value="single" checked> Única
-            </label>
-
-            <label data-checkbox="true"
-                   data-slideup=".app_modal_<?= $type; ?> .repeate_item_enrollment"
-                   data-slidedown=".app_modal_<?= $type; ?> .repeate_item_fixed">
-                <input type="radio" name="repeat_when" value="fixed"> Fixa
-            </label>
-
-            <label data-checkbox="true"
-                   data-slideup=".app_modal_<?= $type; ?> .repeate_item_fixed"
-                   data-slidedown=".app_modal_<?= $type; ?> .repeate_item_enrollment">
-                <input type="radio" name="repeat_when" value="enrollment"> Parcelada
-            </label>
+          <span class="field icon-leanpub">Anotações:</span>
+          <textarea name="name" rows="8" cols="80"></textarea>
         </div>
 
-        <label class="repeate_item repeate_item_fixed" style="display: none">
-            <select name="period">
-                <option value="month">&ofcir; Mensal</option>
-                <option value="year">&ofcir; Anual</option>
-            </select>
-        </label>
-
-        <label class="repeate_item repeate_item_enrollment" style="display: none">
-            <input class="radius" type="number" min="2" max="420" placeholder="1 parcela" name="enrollments"/>
-        </label>
-
-        <button class="btn radius transition icon-check-square-o">
-            Lançar <?= ($type == 'income' ? "Receita" : "Despesa"); ?></button>
+        <button class="btn radius transition icon-check-square-o">Salvar</button>
     </form>
 </div>

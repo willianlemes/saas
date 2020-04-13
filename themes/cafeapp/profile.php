@@ -2,6 +2,10 @@
 
 <div class="app_formbox app_widget">
     <form class="app_form" action="<?= url("/app/profile"); ?>" method="post">
+        <header class="app_widget_title">
+            <h2 class="icon-user">Meu Perfil</h2>
+        </header>
+
         <input type="hidden" name="update" value="true"/>
 
         <div class="app_formbox_photo">

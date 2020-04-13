@@ -1,21 +1,28 @@
 <?php $v->layout("_theme"); ?>
 
+<?php $v->start('styles') ?>
+  <link rel="stylesheet" href="<?= theme("/assets/chosen.min.css", CONF_VIEW_APP); ?>"/>
+<?php $v->stop() ?>
+
 <div class="app_formbox app_widget">
     <form class="app_form" action="<?= url("/imoveis/salvar"); ?>" method="post">
+      <header class="app_widget_title">
+          <h2 class="icon-home">Cadastro de Imóvel</h2>
+      </header>
       <fieldset>
         <legend>Sobre o Imóvel</legend>
         <input type="hidden" name="id" value="<?= $realty->id ?? null ?>">
-        <span class="field">Proprietário: (Nome / Apelido)</span>
-        <div class="tagsinput">
-          <div id="addTag" >
-            <input type="hidden" name="proprietary"
-                   value="<?= ($realty ? $realty->proprietary()->id : null) ?>"/>
-            <input class="tag-input radius autocomplete"
-                   type="text"
-                   data-url-search="<?= url('/imoveis/proprietarios') ?>"
-                   value="<?= ($realty ? $realty->proprietary()->name : null) ?>" required>
-          </div>
-        </div>
+
+        <label>
+          <span class="field">Proprietário:</span>
+          <select class="select_box" name="proprietary">
+            <option value="" disabled selected>Selecione</option>
+            <?php foreach ($owners as $owner): ?>
+              <option <?= ($realty ? ($realty->proprietary == $owner->id ? 'selected' : '') : '') ?> value="<?= $owner->id ?>"><?= $owner->name ?></option>
+            <?php endforeach; ?>
+          </select>
+        </label>
+
         <div class="label_group">
           <label>
               <span class="field">Finalidade:</span>
@@ -195,9 +202,14 @@
 </div>
 
 <?php $v->start('scripts') ?>
-    <script>
-      $(function () {
-        $('.tagsinput').loadProprietary();
+  <script src="<?= theme("/assets/chosen.jquery.min.js", CONF_VIEW_APP); ?>"></script>
+  <script type="text/javascript">
+    $(".select_box").chosen({
+        allow_single_deselect: true,
+        no_results_text: "Oops, nada encontrado!",
+        width: "100%",
+        max_shown_results: 5,
+        herdit_select_classes: true
       });
-    </script>
+  </script>
 <?php $v->stop() ?>

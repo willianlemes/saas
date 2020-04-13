@@ -7,7 +7,7 @@
             <p>Ainda não tem conta? <a title="Cadastre-se!" href="<?= url("/cadastrar"); ?>">Cadastre-se!</a></p>
         </header>
 
-        <form class="auth_form" action="<?= url("/entrar"); ?>" method="post" enctype="multipart/form-data">
+        <form class="auth_form" action="<?= url("/negocios"); ?>" method="post" enctype="multipart/form-data">
             <div class="ajax_response"><?= flash(); ?></div>
             <?= csrf_input(); ?>
 

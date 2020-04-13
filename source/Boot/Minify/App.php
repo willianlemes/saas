@@ -7,6 +7,7 @@ if (strpos(url(), "localhost")) {
     $minCSS->add(__DIR__ . "/../../../shared/styles/styles.css");
     $minCSS->add(__DIR__ . "/../../../shared/styles/boot.css");
     $minCSS->add(__DIR__ . "/../../../shared/styles/jquery-ui.css");
+    $minCSS->add(__DIR__ . "/../../../shared/styles/jquery.tagsinput-revisited.css");
 
     //theme CSS
     $cssDir = scandir(__DIR__ . "/../../../themes/" . CONF_VIEW_APP . "/assets/css");
@@ -31,6 +32,7 @@ if (strpos(url(), "localhost")) {
     $minJS->add(__DIR__ . "/../../../shared/scripts/jquery.mask.js");
     $minJS->add(__DIR__ . "/../../../shared/scripts/highcharts.js");
     $minJS->add(__DIR__ . "/../../../shared/scripts/tracker.js");
+    $minJS->add(__DIR__ . "/../../../shared/scripts/jquery.tagsinput-revisited.js");
 
     //theme CSS
     $jsDir = scandir(__DIR__ . "/../../../themes/" . CONF_VIEW_APP . "/assets/js");

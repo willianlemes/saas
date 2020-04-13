@@ -6,6 +6,16 @@ use Source\Core\Model;
 
 class Person extends Model
 {
+    const PROFILES = [
+                      "customer" => "Cliente",
+                      "broker" => "Corretor",
+                      "owner" => "Proprietário",
+                      "interested" => "Interessado",
+                      "other" => "Outro"
+                    ];
+
+    const TYPES = ["F" => "Física", "J" => "Jurídica"];
+
     public function __construct()
     {
         parent::__construct("person", ["id"], ["name"]);
@@ -18,5 +28,15 @@ class Person extends Model
         }
 
         return null;
+    }
+
+    public function getProfile(): string
+    {
+        return Person::PROFILES[$this->profile];
+    }
+
+    public function getType(): string
+    {
+        return Person::TYPES[$this->type];
     }
 }

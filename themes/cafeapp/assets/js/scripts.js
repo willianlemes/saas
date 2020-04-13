@@ -1,70 +1,10 @@
 $(function () {
 
-  $('.tag-input').focusout(function() {
-    if ($('input[name=proprietary]').val()=='' & $('.tag-input').val()!=='') {
-      $('.tagsinput').addClass('input-error');
-    }else {
-      $('.tagsinput').removeClass('input-error');
-    }
-  });
-
   $('input[type=number]').change(function(){
     if ($(this).val()<0) {
       $(this).val(0);
     }
   }).prop('min',0);
-
-  $.fn.loadProprietary = function() {
-    if ($('input[name=proprietary]').val()=='') {
-      removeTag();
-    }else {
-      addTag($('.tag-input').val());
-    }
-  }
-
-  function addTag(value)
-  {
-    $('<span>', {class: 'tag'}).append(
-      $('<span>', {class: 'tag-text'}).text(value),
-      $('<button>', {class: 'tag-remove'}).click(function(){
-        removeTag();
-      })
-    ).insertBefore('#addTag');
-
-    $('.tag-input').attr('type','hidden');
-  }
-
-  function removeTag()
-  {
-    $('.tag').remove();
-    $('.tag-input').val("").attr('type','text');
-    $('input[name=proprietary]').val("");
-  }
-
-  var urlSearch = $('.autocomplete').data('urlSearch');
-
-  $(".autocomplete").autocomplete({
-      minLength: 3,
-      delay: 450,
-      source: function(data,add){
-        $.ajax({
-          url: urlSearch + '/' + data.term,
-          method: 'GET',
-          dataType: 'json',
-          success:function (response) {
-            add(response);
-          }
-        });
-      },
-      select: function( event, ui ) {
-        $('input[name=proprietary]').val(ui.item.id);
-        addTag(ui.item.value);
-      }
-   });
-
-  $(".row").click(function() {
-    window.location.href=$(this).data("href");
-  });
 
   $(".types").change(function(){
     var maskCpfCnpj = '';
@@ -164,6 +104,38 @@ $(function () {
      */
     $("[data-modalopen]").click(function (e) {
         var clicked = $(this);
+
+        if (typeof clicked.data('modalurl') !== 'undefined')
+            $.ajax({
+                url: form.attr("action"),
+                type: "POST",
+                dataType: "json",
+                beforeSend: function () {
+                    load.fadeIn(200).css("display", "flex");
+                },
+                success: function (response) {
+
+                },
+                complete: function () {
+                    if (form.data("reset") === true) {
+                        form.trigger("reset");
+                    }
+                },
+                error: function (event, jqxhr, ajaxOptions, errorThrown) {
+                    // var message = jqxhr.status;
+                    var message = "<div class='message error icon-warning'>Desculpe mas não foi possível processar a requisição. Favor tente novamente!</div>";
+                    if (flash.length) {
+                        flash.html(message).fadeIn(100).effect("bounce", 300);
+                    } else {
+                        form.prepend("<div class='" + flashClass + "'>" + message + "</div>")
+                            .find("." + flashClass).effect("bounce", 300);
+                    }
+                }
+            });
+        });
+
+        }
+
         var modal = clicked.data("modalopen");
         $(".app_modal").fadeIn(effecttime).css("display", "flex");
         $(modal).fadeIn(effecttime);
