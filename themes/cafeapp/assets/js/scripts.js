@@ -81,6 +81,22 @@ $(function () {
        }).change();
     });
 
+    $.fn.clearSelected = function(){
+      if ($(this).prop('tagName') === 'OPTION') {
+        $.map($(this), function(item){
+          $(item).attr('selected',false);
+        });
+      }
+    };
+
+    $.fn.clear = function(){
+      const TAGSNAME = ['INPUT', 'TEXTAREA'];
+
+      if (TAGSNAME.indexOf($(this).prop('tagName'))) {
+        $(this).val(null);
+      }
+    };
+
     var effecttime = 200;
 
     /*
@@ -102,43 +118,73 @@ $(function () {
     /*
      * APP MODAL
      */
-    $("[data-modalopen]").click(function (e) {
-        var clicked = $(this);
 
-        if (typeof clicked.data('modalurl') !== 'undefined')
-            $.ajax({
-                url: form.attr("action"),
-                type: "POST",
-                dataType: "json",
-                beforeSend: function () {
-                    load.fadeIn(200).css("display", "flex");
-                },
-                success: function (response) {
+     function loadBusinessForm(business){
+       $('.app_modal_business input[name=id]').val(business.id);
 
-                },
-                complete: function () {
-                    if (form.data("reset") === true) {
-                        form.trigger("reset");
-                    }
-                },
-                error: function (event, jqxhr, ajaxOptions, errorThrown) {
-                    // var message = jqxhr.status;
-                    var message = "<div class='message error icon-warning'>Desculpe mas não foi possível processar a requisição. Favor tente novamente!</div>";
-                    if (flash.length) {
-                        flash.html(message).fadeIn(100).effect("bounce", 300);
-                    } else {
-                        form.prepend("<div class='" + flashClass + "'>" + message + "</div>")
-                            .find("." + flashClass).effect("bounce", 300);
-                    }
-                }
-            });
-        });
+       $.map($('.app_modal_business select[name=client] option'), function(item){
+         if (business.client == $(item).val()) {
+           console.log('client: ' + $(item).val());
+           $(item).attr('selected','selected');
+           return;
+         }
+       });
 
-        }
+       $('.app_modal_business input[name=title]').val(business.title);
 
-        var modal = clicked.data("modalopen");
-        $(".app_modal").fadeIn(effecttime).css("display", "flex");
-        $(modal).fadeIn(effecttime);
+       $.map($('.app_modal_business select[name=realty] option'), function(item){
+         if (business.realty == $(item).val()) {
+           $(item).attr('selected','selected');
+           return;
+         }
+       });
+
+       $('.select_chosen').trigger('chosen:updated');
+
+       $.map($('.app_modal_business select[name=stage] option'), function(item){
+         if (business.stage == $(item).val()) {
+           $(item).attr('selected','selected');
+           return;
+         }
+       });
+
+       $('.app_modal_business input[name=expected_closure]').val(business.expected_closure);
+       $('.app_modal_business textarea[name=annotations]').val(business.annotations);
+     };
+
+     function clearBusinessForm(){
+       $('.app_modal_business input[name=id]').clear();
+       $('.app_modal_business select[name=client] option').clearSelected();
+       $(".app_modal_business select[name=client] option[value='']").attr("selected", "selected");
+       $('.app_modal_business input[name=title]').clear();
+       $('.app_modal_business select[name=realty] option').clearSelected();
+       $(".app_modal_business select[name=realty] option[value='']").attr("selected", "selected");
+       $('.select_chosen').trigger('chosen:updated');
+       $('.app_modal_business select[name=status] option').clearSelected();
+       $(".app_modal_business select[name=status] option[value='']").attr("selected", "selected");
+       $('.app_modal_business input[name=expected_closure]').clear();
+       $('.app_modal_business textarea[name=annotations]').clear();
+     };
+
+    $(".click_open_business_new_form").click(function (event) {
+      clearBusinessForm();
+      $(".app_modal").fadeIn(effecttime).css("display", "flex");
+      $('.app_modal_business').fadeIn(effecttime);
+    });
+
+    $(".click_open_business_update_form").click(function (event) {
+
+      $.ajax({
+           url: $(this).data('url'),
+           type: 'GET',
+           dataType: 'json',
+           success: function(business) {
+             loadBusinessForm(business);
+           }
+       });
+
+      $(".app_modal").fadeIn(effecttime).css("display", "flex");
+      $('.app_modal_business').fadeIn(effecttime);
     });
 
     $("[data-modalclose]").click(function (e) {
@@ -237,6 +283,7 @@ $(function () {
             type: "POST",
             dataType: "json",
             beforeSend: function () {
+              console.log('antes do envio');
                 load.fadeIn(200).css("display", "flex");
             },
             uploadProgress: function (event, position, total, completed) {
@@ -250,6 +297,7 @@ $(function () {
                 }
             },
             success: function (response) {
+              console.log('sucesso');
                 //redirect
                 if (response.redirect) {
                     window.location.href = response.redirect;
@@ -282,6 +330,7 @@ $(function () {
                 }
             },
             error: function (event, jqxhr, ajaxOptions, errorThrown) {
+              console.log('erro');
                 var message = jqxhr.status;
                 // var message = "<div class='message error icon-warning'>Desculpe mas não foi possível processar a requisição. Favor tente novamente!</div>";
                 if (flash.length) {

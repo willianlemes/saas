@@ -7,7 +7,7 @@
     <?= $head; ?>
 
     <link rel="stylesheet" href="<?= theme("/assets/style.css", CONF_VIEW_APP); ?>"/>
-    <?= $v->section("styles"); ?>    
+    <?= $v->section("styles"); ?>
     <link rel="icon" type="image/png" href="<?= theme("/assets/images/favicon.png", CONF_VIEW_APP); ?>"/>
 </head>
 <body>
@@ -63,7 +63,7 @@
         </span>
     </footer>
 
-    <?= $v->insert("views/modals"); ?>
+    <?= $v->section("modal"); ?>    
 </div>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-53658515-18"></script>

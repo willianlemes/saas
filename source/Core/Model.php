@@ -280,7 +280,8 @@ abstract class Model
         if (empty($this->id)) {
             $id = $this->create($this->safe());
             if ($this->fail()) {
-                $this->message->error("Erro ao cadastrar, verifique os dados");
+                $this->message->error($this->fail());
+                // $this->message->error("Erro ao cadastrar, verifique os dados");
                 return false;
             }
         }

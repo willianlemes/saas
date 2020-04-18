@@ -74,10 +74,10 @@ $route->post("/profile", "App:profile");
  */
  $route->group("/negocios");
  $route->get("/", "BusinessController:index");
- // $route->get("/p/{page}", "PersonController:index");
- // $route->get("/cadastrar", "PersonController:registrationForm");
- // $route->get("/alterar/{id}", "PersonController:registrationForm");
- // $route->post("/salvar", "PersonController:save");
+ $route->get("/cadastrar", "BusinessController:registrationForm");
+ $route->get("/alterar/{id}", "BusinessController:registrationForm");
+ $route->post("/salvar", "BusinessController:save");
+ $route->get("/p/{page}", "BusinessController:index");
 
 /**
  * ERROR ROUTES
