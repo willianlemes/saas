@@ -65,7 +65,7 @@
 
           <div class="label_check">
             <span class="field icon-leanpub">Anotações:</span>
-            <textarea name="annotations" rows="8" cols="80"></textarea>
+            <textarea name="annotations" rows="6" cols="80"></textarea>
           </div>
 
           <div class="al-center">

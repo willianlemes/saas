@@ -21,32 +21,15 @@
         <?php if (!$businessList): ?>
           <div class="message info icon-info">Ainda não existem imóveis cadastrados</div>
         <?php else: ?>
-            <div class="app_launch_item header">
-                <p class="desc">Título</p>
-                <p class="desc">Cliente</p>
-                <p class="desc">Etapa</p>
-            </div>
             <?php foreach ($businessList as $business): ?>
-                <article class="app_launch_item">
-                    <p class="desc app_invoice_link transition">
-                        <a class="click_open_business_update_form" title="<?= $business->title; ?>"
-                           data-url="<?= url('/negocios/alterar/' . $business->id) ?>">
-                           <?= $business->title; ?>
-                         </a>
-                    </p>
-                    <p class="desc app_invoice_link transition">
-                        <a class="click_open_business_update_form" title="<?= $business->client()->name; ?>"
-                           data-url="<?= url('/negocios/alterar/' . $business->id) ?>">
-                           <?= $business->client()->name; ?>
-                         </a>
-                    </p>
-                    <p class="desc app_invoice_link transition">
-                      <a class="click_open_business_update_form" title="<?= $business->status(); ?>"
-                        data-url="<?= url('/negocios/alterar/' . $business->id) ?>">
-                         <?= $business->status() ?>
-                      </a>
-                    </p>
-                </article>
+              <article class="card click_open_business_update_form" data-url="<?= url("negocios/alterar/{$business->id}") ?>">
+                <header class="icon-home title">
+                  <b><?= $business->title; ?></b>
+                </header>
+                <section class="description">
+                  <span class="icon-user"><?= $business->client()->name; ?></span>
+                </section>
+              </article>
             <?php endforeach; ?>
             <?= $paginator; ?>
         <?php endif; ?>
