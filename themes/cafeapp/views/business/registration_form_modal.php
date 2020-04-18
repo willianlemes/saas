@@ -1,6 +1,20 @@
-<?php $clients = (new Source\Models\Person())->find(null, null, 'id,name')->fetch(true); ?>
-<?php $properties = (new Source\Models\Realty())->find(null, null, 'id,street')->fetch(true); ?>
-<?php $status = Source\Models\Business::STATUS; ?>
+<?php
+  $idUser = user()->id;
+
+  $clients = (new Source\Models\Person())->find(
+      "user_id = :u and profile = :p",
+      "u={$idUser}&p=customer",
+      "id,name"
+  )->fetch(true);
+
+  $properties = (new Source\Models\Realty())->find(
+      "user_id = :u",
+      "u={$idUser}",
+      "id,finality,kind,price"
+  )->fetch(true);
+  $status = Source\Models\Business::STATUS;
+?>
+
 
 <div id="app_modal" class="app_modal">
   <div class="app_modal_box app_modal_business">
@@ -27,7 +41,7 @@
             <select class="select_chosen" name="realty" required>
               <option value="" disabled selected>Selecione</option>
               <?php foreach ($properties as $realty): ?>
-                <option value="<?= $realty->id ?>"><?= $realty->street ?></option>
+                <option value="<?= $realty->id ?>"><?= "{$realty->finality} de {$realty->kind} por " . str_price($realty->price) ?></option>
               <?php endforeach; ?>
             </select>
           </label>

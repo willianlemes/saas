@@ -36,7 +36,7 @@ class App extends Controller
 
         if (!$this->user = Auth::user()) {
             $this->message->warning("Efetue login para acessar o APP.")->flash();
-            redirect("/entrar");
+            redirect("/");
         }
 
         (new Access())->report();

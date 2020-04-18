@@ -22,7 +22,7 @@ class PersonController extends Controller
 
         if (!$this->user = Auth::user()) {
             $this->message->warning("Efetue login para acessar o APP.")->flash();
-            redirect("/entrar");
+            redirect("/");
         }
     }
 
@@ -59,9 +59,6 @@ class PersonController extends Controller
             $person = null;
         }
 
-        $profiles = Person::PROFILES;
-        $types = Person::TYPES;
-
         $head = $this->seo->render(
             "Cadastro de Pessoas - " . CONF_SITE_NAME,
             CONF_SITE_DESC,
@@ -79,8 +76,8 @@ class PersonController extends Controller
                                 image($person->photo, 360, 360) :
                                 $avatar :
                       $avatar),
-          "profiles" => $profiles,
-          "types" => $types
+          "profiles" => Person::PROFILES,
+          "types" => Person::TYPES
         ]);
     }
 

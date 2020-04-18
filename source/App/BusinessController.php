@@ -21,7 +21,7 @@ class BusinessController extends Controller
 
         if (!$this->user = Auth::user()) {
             $this->message->warning("Efetue login para acessar o APP.")->flash();
-            redirect("/entrar");
+            redirect("/");
         }
     }
 
@@ -36,15 +36,15 @@ class BusinessController extends Controller
         );
 
         $businessList = (new Business())->find(
-            "user_id = :user",
-            "user={$this->user->id}"
+            "user_id = :u",
+            "u={$this->user->id}"
         );
 
         $pager = new Pager(url("/negocios/p/"));
         $pager->pager($businessList->count(), 7, ($data['page'] ?? 1));
 
+
         echo $this->view->render("views/business/index", [
-                                 "user" => $this->user,
                                  "head" => $head,
                                  "businessList" => $businessList->limit($pager->limit())->offset($pager->offset())->fetch(true),
                                  "paginator" => $pager->render()

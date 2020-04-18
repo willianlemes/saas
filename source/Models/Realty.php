@@ -11,6 +11,25 @@ use Source\Models\User;
  */
 class Realty extends Model
 {
+    const PURPOSES = ["Venda", "Troca"];
+    const KINDS = [
+                   "Casa",
+                   "Ponto Comercial",
+                   "Barracão",
+                   "Terreno",
+                   "Sobrado",
+                   "Sítio",
+                   "Fazenda",
+                   "Chácara"
+                  ];
+    const TYPES_OF_MEASURES =  [
+                                "Alqueire",
+                                "Metro 2",
+                                "Hectare",
+                                "Km",
+                                "Metro"
+                               ];
+
     public function __construct()
     {
         parent::__construct("properties", ["id"], ["proprietary", "finality", "kind", "price"]);

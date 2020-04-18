@@ -13,17 +13,6 @@ class RealtyController extends Controller
 {
     /** @var User */
     private $user;
-    private const FINALITY = ["Venda", "Troca"];
-    private const KIND = [
-                          "Casa",
-                          "Ponto Comercial",
-                          "Barracão",
-                          "Terreno",
-                          "Sobrado",
-                          "Sítio",
-                          "Fazenda",
-                          "Chácara"
-                         ];
 
     public function __construct()
     {
@@ -31,7 +20,7 @@ class RealtyController extends Controller
 
         if (!$this->user = Auth::user()) {
             $this->message->warning("Efetue login para acessar o APP.")->flash();
-            redirect("/entrar");
+            redirect("/");
         }
     }
 
@@ -64,8 +53,8 @@ class RealtyController extends Controller
         echo $this->view->render("views/realty/index", [
         "user" => $this->user,
         "head" => $head,
-        "finality" => RealtyController::FINALITY,
-        "kinds" => RealtyController::KIND,
+        "finality" => Realty::PURPOSES,
+        "kinds" => Realty::KINDS,
         "properties" => $properties,
         "paginator" => $pager->render(),
         "filter" => (object)[
@@ -94,21 +83,13 @@ class RealtyController extends Controller
 
         $owners = (new Person())->find(null, null, 'id,name')->fetch(true);
 
-        $measureType = [
-                        "Alqueire",
-                        "Metro 2",
-                        "Hectare",
-                        "Km",
-                        "Metro"
-                      ];
-
         echo $this->view->render("views/realty/registration_form", [
                                  "head" => $head,
                                  "owners" => $owners,
-                                 "finality" => RealtyController::FINALITY,
-                                 "kinds" => RealtyController::KIND,
+                                 "finality" => Realty::PURPOSES,
+                                 "kinds" => Realty::KINDS,
                                  "realty" => $realty,
-                                 "measureType" => $measureType
+                                 "measureType" => Realty::TYPES_OF_MEASURES
                                ]);
     }
 
