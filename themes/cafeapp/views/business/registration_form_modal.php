@@ -18,7 +18,7 @@
 
 <div id="app_modal" class="app_modal">
   <div class="app_modal_box app_modal_business">
-      <p class="title icon-suitcase">Novo Negócio</p>
+      <p id="title_business" class="title icon-suitcase">Novo Negócio</p>
       <form class="app_form" action="<?= url("/negocios/salvar"); ?>" method="post">
           <input type="hidden" name="id" value=""/>
           <label>

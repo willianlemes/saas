@@ -142,6 +142,7 @@ $(function () {
       var load = $(".ajax_load");
       load.fadeIn(200).css("display", "flex");
       clearBusinessForm();
+      $('#title_business').text("Novo Negócio");
       $('.btn_remove').hide();
       $('#btn_save_business').show();
       $('#btn_update_business').hide();
@@ -162,6 +163,7 @@ $(function () {
            },
            success: function(business) {
              loadBusinessForm(business);
+             $('#title_business').text("Alterar Negócio");
              $('.btn_remove').show();
              $('#btn_save_business').hide();
              $('#btn_update_business').show();

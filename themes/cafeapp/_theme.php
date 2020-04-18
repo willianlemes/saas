@@ -36,10 +36,10 @@
             <div class="app_sidebar_user app_widget_title">
                 <span class="user">
                     <?php if (user()->photo()): ?>
-                        <img class="rounded" alt="Robson" title="Robson"
+                        <img class="rounded" alt="<?= user()->first_name; ?>" title="<?= user()->first_name; ?>"
                              src="<?= image(user()->photo, 260, 260); ?>"/>
                     <?php else: ?>
-                        <img class="rounded" alt="Robson" title="Robson"
+                        <img class="rounded" alt="<?= user()->first_name; ?>" title="<?= user()->first_name; ?>"
                              src="<?= theme("/assets/images/avatar.jpg", CONF_VIEW_APP); ?>"/>
                     <?php endif; ?>
                     <span><?= user()->first_name; ?></span>
@@ -63,7 +63,7 @@
         </span>
     </footer>
 
-    <?= $v->section("modal"); ?>    
+    <?= $v->section("modal"); ?>
 </div>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-53658515-18"></script>

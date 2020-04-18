@@ -140,6 +140,8 @@ class BusinessController extends Controller
         }
 
         $business->delete("id = :id and user_id = :user", "id={$id}&user={$this->user->id}");
+
+        $this->message->success("Negócio excluído com sucesso!")->flash();
         $json['reload'] = true;
         echo json_encode($json);
         return;

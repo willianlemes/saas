@@ -81,7 +81,11 @@ class RealtyController extends Controller
             false
         );
 
-        $owners = (new Person())->find(null, null, 'id,name')->fetch(true);
+        $owners = (new Person())->find(
+            "user_id = :u and profile = :p",
+            "u={$this->user->id}&p=owner",
+            "id,name"
+        )->fetch(true);
 
         echo $this->view->render("views/realty/registration_form", [
                                  "head" => $head,
