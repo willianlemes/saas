@@ -77,6 +77,7 @@ $route->post("/profile", "App:profile");
  $route->get("/cadastrar", "BusinessController:registrationForm");
  $route->get("/alterar/{id}", "BusinessController:registrationForm");
  $route->post("/salvar", "BusinessController:save");
+ $route->post("/excluir/{id}", "BusinessController:delete");
  $route->get("/p/{page}", "BusinessController:index");
 
 /**

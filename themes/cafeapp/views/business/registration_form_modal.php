@@ -2,7 +2,7 @@
 <?php $properties = (new Source\Models\Realty())->find(null, null, 'id,street')->fetch(true); ?>
 <?php $status = Source\Models\Business::STATUS; ?>
 
-<div id="app_modal" class="app_modal" data-modalclose="false">
+<div id="app_modal" class="app_modal">
   <div class="app_modal_box app_modal_business">
       <p class="title icon-suitcase">Novo Negócio</p>
       <form class="app_form" action="<?= url("/negocios/salvar"); ?>" method="post">
@@ -54,7 +54,17 @@
             <textarea name="annotations" rows="8" cols="80"></textarea>
           </div>
 
-          <button class="btn radius transition icon-check-square-o">Salvar</button>
+          <div class="al-center">
+              <div class="app_formbox_actions">
+                  <a class="btn_remove transition icon-error"
+                     data-businessdelete="<?= url("/negocios/excluir/"); ?>">Excluir</a>
+                  <button id="btn_update_business" class="btn btn_inline radius transition icon-pencil-square-o">Atualizar</button>
+                  <button id="btn_save_business" class="btn btn_inline radius transition icon-check-square-o">Salvar</button>
+                  <a class="btn_back transition radius icon-sign-in click_back_business_form" title="Voltar">Voltar</a>
+              </div>
+          </div>
+
+
       </form>
   </div>
 </div>

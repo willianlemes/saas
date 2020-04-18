@@ -78,10 +78,9 @@ class BusinessController extends Controller
             $json['client'] = $business->client_id;
             $json['title'] = $business->title;
             $json['realty'] = $business->realty_id;
-            $json['stage'] = $business->stage;
+            $json['status'] = $business->status;
             $json['expected_closure'] = $business->expected_closure;
             $json['annotations'] = $business->annotations;
-            $json['teste'] = $json["expected_closure"];
         }
         echo json_encode($json);
     }
@@ -117,7 +116,31 @@ class BusinessController extends Controller
         }
 
         $this->message->success($message)->flash();
-        $json["redirect"] = url("/negocios");
+        $json["reload"] = true;
+        echo json_encode($json);
+        return;
+    }
+
+    public function delete(? array $data)
+    {
+        $id = filter_var($data["id"], FILTER_VALIDATE_INT);
+
+        if (empty($id)) {
+            $json['reload'] = false;
+            echo json_encode($json);
+            return;
+        }
+
+        $business = (new Business())->findById($id);
+
+        if (!$business) {
+            $json['reload'] = false;
+            echo json_encode($json);
+            return;
+        }
+
+        $business->delete("id = :id and user_id = :user", "id={$id}&user={$this->user->id}");
+        $json['reload'] = true;
         echo json_encode($json);
         return;
     }

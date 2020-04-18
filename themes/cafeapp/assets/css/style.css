@@ -165,7 +165,6 @@ body {
     color: var(--color-blue);
 }
 
-
 .app_form .filter {
     display: block;
     border: none;
@@ -196,6 +195,7 @@ body {
 
 .app_invoice_link a:hover {
     text-decoration: underline;
+    cursor: pointer;
 }
 
 /*MODAL EXPENSE VARIATION*/

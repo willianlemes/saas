@@ -81,18 +81,9 @@ $(function () {
        }).change();
     });
 
-    $.fn.clearSelected = function(){
-      if ($(this).prop('tagName') === 'OPTION') {
-        $.map($(this), function(item){
-          $(item).attr('selected',false);
-        });
-      }
-    };
-
     $.fn.clear = function(){
       const TAGSNAME = ['INPUT', 'TEXTAREA'];
-
-      if (TAGSNAME.indexOf($(this).prop('tagName'))) {
+      if (TAGSNAME.indexOf($(this).prop('tagName')) >= 0) {
         $(this).val(null);
       }
     };
@@ -121,76 +112,71 @@ $(function () {
 
      function loadBusinessForm(business){
        $('.app_modal_business input[name=id]').val(business.id);
-
-       $.map($('.app_modal_business select[name=client] option'), function(item){
-         if (business.client == $(item).val()) {
-           console.log('client: ' + $(item).val());
-           $(item).attr('selected','selected');
-           return;
-         }
-       });
-
+       $('.app_modal_business select[name=client] option[selected]').removeAttr('selected');
+       $('.app_modal_business select[name=client] option[value=' + business.client +  ']').attr('selected',true);
        $('.app_modal_business input[name=title]').val(business.title);
-
-       $.map($('.app_modal_business select[name=realty] option'), function(item){
-         if (business.realty == $(item).val()) {
-           $(item).attr('selected','selected');
-           return;
-         }
-       });
-
+       $('.app_modal_business select[name=realty] option[selected]').removeAttr('selected');
+       $('.app_modal_business select[name=realty] option[value=' + business.realty +  ']').attr('selected',true);
        $('.select_chosen').trigger('chosen:updated');
-
-       $.map($('.app_modal_business select[name=stage] option'), function(item){
-         if (business.stage == $(item).val()) {
-           $(item).attr('selected','selected');
-           return;
-         }
-       });
-
+       $('.app_modal_business select[name=status] option[selected]').removeAttr('selected');
+       $('.app_modal_business select[name=status] option[value=' + business.status + ']').attr('selected',true);
        $('.app_modal_business input[name=expected_closure]').val(business.expected_closure);
        $('.app_modal_business textarea[name=annotations]').val(business.annotations);
      };
 
      function clearBusinessForm(){
        $('.app_modal_business input[name=id]').clear();
-       $('.app_modal_business select[name=client] option').clearSelected();
+       $('.app_modal_business select[name=client] option[selected]').removeAttr('selected');
        $(".app_modal_business select[name=client] option[value='']").attr("selected", "selected");
        $('.app_modal_business input[name=title]').clear();
-       $('.app_modal_business select[name=realty] option').clearSelected();
+       $('.app_modal_business select[name=realty] option[selected]').removeAttr('selected');
        $(".app_modal_business select[name=realty] option[value='']").attr("selected", "selected");
        $('.select_chosen').trigger('chosen:updated');
-       $('.app_modal_business select[name=status] option').clearSelected();
+       $('.app_modal_business select[name=status] option[selected]').removeAttr('selected');
        $(".app_modal_business select[name=status] option[value='']").attr("selected", "selected");
        $('.app_modal_business input[name=expected_closure]').clear();
        $('.app_modal_business textarea[name=annotations]').clear();
      };
 
     $(".click_open_business_new_form").click(function (event) {
+      var load = $(".ajax_load");
+      load.fadeIn(200).css("display", "flex");
       clearBusinessForm();
+      $('.btn_remove').hide();
+      $('#btn_save_business').show();
+      $('#btn_update_business').hide();
       $(".app_modal").fadeIn(effecttime).css("display", "flex");
       $('.app_modal_business').fadeIn(effecttime);
+      load.fadeOut(200);
     });
 
     $(".click_open_business_update_form").click(function (event) {
+      var load = $(".ajax_load");
 
       $.ajax({
            url: $(this).data('url'),
            type: 'GET',
            dataType: 'json',
+           beforeSend: function () {
+               load.fadeIn(200).css("display", "flex");
+           },
            success: function(business) {
              loadBusinessForm(business);
+             $('.btn_remove').show();
+             $('#btn_save_business').hide();
+             $('#btn_update_business').show();
+             $(".app_modal").fadeIn(effecttime).css("display", "flex");
+             $('.app_modal_business').fadeIn(effecttime);
+             load.fadeOut(200);
            }
        });
 
-      $(".app_modal").fadeIn(effecttime).css("display", "flex");
-      $('.app_modal_business').fadeIn(effecttime);
     });
 
-    $("[data-modalclose]").click(function (e) {
+    $(".click_back_business_form").click(function (e) {
         if (e.target === this) {
-            $(this).fadeOut(effecttime);
-            $(this).children().fadeOut(effecttime);
+            $(".app_modal").fadeOut(effecttime);
+            $(".app_modal").children().fadeOut(effecttime);
         }
     });
 
@@ -283,7 +269,6 @@ $(function () {
             type: "POST",
             dataType: "json",
             beforeSend: function () {
-              console.log('antes do envio');
                 load.fadeIn(200).css("display", "flex");
             },
             uploadProgress: function (event, position, total, completed) {
@@ -297,7 +282,6 @@ $(function () {
                 }
             },
             success: function (response) {
-              console.log('sucesso');
                 //redirect
                 if (response.redirect) {
                     window.location.href = response.redirect;
@@ -330,7 +314,6 @@ $(function () {
                 }
             },
             error: function (event, jqxhr, ajaxOptions, errorThrown) {
-              console.log('erro');
                 var message = jqxhr.status;
                 // var message = "<div class='message error icon-warning'>Desculpe mas não foi possível processar a requisição. Favor tente novamente!</div>";
                 if (flash.length) {
@@ -392,16 +375,15 @@ $(function () {
 
 
     /*
-     * APP INVOICE REMOVE
+     * APP BUSINESS DELETE
      */
-    $("[data-invoiceremove]").click(function (e) {
-        var remove = confirm("ATENÇÃO: Essa ação não pode ser desfeita! Tem certeza que deseja excluir esse lançamento?");
+    $("[data-businessdelete]").click(function (e) {
+        var remove = confirm("ATENÇÃO: Essa ação não pode ser desfeita! Tem certeza que deseja excluir o lançamento do negócio?");
 
         if (remove === true) {
-            $.post($(this).data("invoiceremove"), function (response) {
-                //redirect
-                if (response.redirect) {
-                    window.location.href = response.redirect;
+            $.post($(this).data("businessdelete") + $('.app_modal_business input[name=id]').val(), function (response) {
+                if (response.reload) {
+                    window.location.reload();
                 }
             }, "json");
         }
